@@ -78,13 +78,19 @@ export function CopyButton({
 
   const isIconOnly = variant === 'icon' || (!label && !copiedLabel);
 
+  const defaultAriaLabel = copied
+    ? 'Texto copiado'
+    : typeof label === 'string'
+    ? label
+    : 'Copiar texto';
+
   return (
     <button
       type="button"
       onClick={handleCopy}
       disabled={disabled}
       title={title || (copied ? 'Copiado!' : 'Copiar para a área de transferência')}
-      aria-label={copied ? 'Texto copiado' : 'Copiar texto'}
+      aria-label={props['aria-label'] || defaultAriaLabel}
       className={cn(
         'inline-flex items-center justify-center transition-all duration-200 cursor-pointer select-none active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed',
         variant !== 'icon' && sizeStyles[size],
