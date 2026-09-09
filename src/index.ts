@@ -70,6 +70,7 @@ export { Pagination, type PaginationProps } from './components/Pagination';
 
 // Export domain components
 export { VideoPreviewModal, type VideoPreviewModalProps, type VideoPreviewItem } from './components/VideoPreviewModal';
+export { HighlightVideoCard, type HighlightVideoCardProps, type HighlightVideoData } from './components/HighlightVideoCard';
 export { VideoCard, type VideoCardProps, type VideoData } from './components/VideoCard';
 export { ArenaCard, type ArenaCardProps, type ArenaData } from './components/ArenaCard';
 export { ArenaPosterCard, type ArenaPosterCardProps } from './components/ArenaPosterCard';
