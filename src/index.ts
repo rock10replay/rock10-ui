@@ -81,6 +81,8 @@ export { LikeButton, type LikeButtonProps } from './components/LikeButton';
 export { DownloadButton, type DownloadButtonProps } from './components/DownloadButton';
 export { Logo, type LogoProps } from './components/Logo';
 export { ShareLinkModal, type ShareLinkModalProps } from './components/ShareLinkModal';
+export { PixPaymentModal, type PixPaymentModalProps } from './components/PixPaymentModal';
+export { ReceiptModal, type ReceiptModalProps } from './components/ReceiptModal';
 
 // Export styles
 import './styles/theme.css';

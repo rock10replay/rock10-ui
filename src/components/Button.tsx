@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode, forwardRef } from 'react';
+import { ButtonHTMLAttributes, ReactNode, forwardRef, isValidElement, createElement } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Loader2 } from 'lucide-react';
 import { cn } from '../utils/cn';
@@ -48,8 +48,18 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   children?: ReactNode;
   isLoading?: boolean;
-  leftIcon?: ReactNode;
-  rightIcon?: ReactNode;
+  leftIcon?: ReactNode | React.ComponentType<{ className?: string }>;
+  rightIcon?: ReactNode | React.ComponentType<{ className?: string }>;
+  icon?: ReactNode | React.ComponentType<{ className?: string }>;
+}
+
+function renderButtonIcon(icon?: ReactNode | React.ComponentType<{ className?: string }>, className = 'w-4 h-4') {
+  if (!icon) return null;
+  if (isValidElement(icon)) return icon;
+  if (typeof icon === 'function' || (typeof icon === 'object' && icon !== null && 'render' in icon)) {
+    return createElement(icon as React.ComponentType<{ className?: string }>, { className });
+  }
+  return icon as ReactNode;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -62,12 +72,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       isLoading = false,
       leftIcon,
       rightIcon,
+      icon,
       children,
       disabled,
       ...props
     },
     ref
   ) => {
+    const effectiveLeftIcon = renderButtonIcon(leftIcon || icon, size === 'sm' ? 'w-3.5 h-3.5' : 'w-4 h-4');
+    const effectiveRightIcon = renderButtonIcon(rightIcon, size === 'sm' ? 'w-3.5 h-3.5' : 'w-4 h-4');
+
     return (
       <button
         ref={ref}
@@ -78,10 +92,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading ? (
           <Loader2 className="w-4 h-4 animate-spin shrink-0" />
         ) : (
-          leftIcon && <span className="shrink-0">{leftIcon}</span>
+          effectiveLeftIcon && <span className="shrink-0">{effectiveLeftIcon}</span>
         )}
         {children && <span>{children}</span>}
-        {!isLoading && rightIcon && <span className="shrink-0">{rightIcon}</span>}
+        {!isLoading && effectiveRightIcon && <span className="shrink-0">{effectiveRightIcon}</span>}
       </button>
     );
   }

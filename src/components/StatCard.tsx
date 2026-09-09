@@ -49,6 +49,11 @@ export interface StatCardProps {
   title: string;
   value: number | string;
   subtitle?: ReactNode;
+  description?: ReactNode;
+  trend?: {
+    value: number | string;
+    isPositive?: boolean;
+  };
   icon?: ReactNode;
   color?: keyof typeof colorThemes;
   variant?: 'default' | 'horizontal' | 'compact';
@@ -62,6 +67,8 @@ export function StatCard({
   title,
   value,
   subtitle,
+  description,
+  trend,
   icon,
   color = 'purple',
   variant = 'default',
@@ -70,6 +77,7 @@ export function StatCard({
   className,
   onClick,
 }: StatCardProps) {
+  const effectiveSubtitle = subtitle ?? description;
   const [displayedValue, setDisplayedValue] = useState<string | number>(
     typeof value === 'number' && animateValue ? 0 : value
   );
@@ -159,9 +167,14 @@ export function StatCard({
           <div className="text-2xl font-black text-gray-900 dark:text-dark-text leading-tight mt-0.5 truncate">
             {formattedValue}
           </div>
-          {subtitle && (
+          {effectiveSubtitle && (
             <div className="text-xs text-gray-500 dark:text-dark-text-muted font-medium mt-0.5 truncate">
-              {subtitle}
+              {effectiveSubtitle}
+            </div>
+          )}
+          {trend && (
+            <div className={cn('text-xs font-bold mt-1 flex items-center gap-0.5', trend.isPositive ? 'text-emerald-600' : 'text-red-600')}>
+              {trend.isPositive ? '↑' : '↓'} {trend.value}%
             </div>
           )}
         </div>
@@ -180,15 +193,22 @@ export function StatCard({
         )}
       >
         <div className="min-w-0 flex-1">
-          <span className={cn('text-[10px] font-bold uppercase tracking-wider block truncate', theme.text)}>
-            {title}
-          </span>
+          <div className="flex items-center justify-between gap-1">
+            <span className={cn('text-[10px] font-bold uppercase tracking-wider block truncate', theme.text)}>
+              {title}
+            </span>
+            {trend && (
+              <span className={cn('text-[10px] font-bold shrink-0', trend.isPositive ? 'text-emerald-600' : 'text-red-600')}>
+                {trend.isPositive ? '↑' : '↓'} {trend.value}%
+              </span>
+            )}
+          </div>
           <div className="text-xl font-black text-gray-900 dark:text-dark-text leading-tight mt-0.5 truncate">
             {formattedValue}
           </div>
-          {subtitle && (
+          {effectiveSubtitle && (
             <div className="text-[11px] text-gray-500 dark:text-dark-text-muted font-medium mt-0.5 truncate">
-              {subtitle}
+              {effectiveSubtitle}
             </div>
           )}
         </div>
@@ -225,11 +245,18 @@ export function StatCard({
         {formattedValue}
       </div>
 
-      {subtitle && (
-        <div className="text-xs text-gray-500 dark:text-dark-text-muted font-medium mt-1.5 flex items-center gap-1">
-          {subtitle}
-        </div>
-      )}
+      <div className="flex items-center justify-between gap-2 mt-1.5">
+        {effectiveSubtitle && (
+          <div className="text-xs text-gray-500 dark:text-dark-text-muted font-medium flex items-center gap-1">
+            {effectiveSubtitle}
+          </div>
+        )}
+        {trend && (
+          <span className={cn('text-xs font-bold', trend.isPositive ? 'text-emerald-600' : 'text-red-600')}>
+            {trend.isPositive ? '↑' : '↓'} {trend.value}%
+          </span>
+        )}
+      </div>
     </div>
   );
 }
