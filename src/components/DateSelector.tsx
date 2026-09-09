@@ -171,7 +171,7 @@ export const DateSelector = ({
               <button
                 type="button"
                 className={cn(
-                  "w-full px-3 py-2 text-left font-sans text-sm font-medium text-gray-700 dark:text-dark-text rounded-xl border-none bg-transparent cursor-pointer transition-all hover:bg-gray-150 dark:hover:bg-dark-surface-light min-h-[40px]",
+                  "w-full px-3 py-2 text-left font-sans text-sm font-medium text-gray-700 dark:text-dark-text rounded-xl border-none bg-transparent cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-dark-surface-light min-h-[40px]",
                   selectedPreset === 'today' && "bg-primary-50 dark:bg-primary-950/20 text-primary-700 dark:text-primary-400 font-semibold"
                 )}
                 onClick={() => handlePresetClick('today')}
@@ -181,7 +181,7 @@ export const DateSelector = ({
               <button
                 type="button"
                 className={cn(
-                  "w-full px-3 py-2 text-left font-sans text-sm font-medium text-gray-700 dark:text-dark-text rounded-xl border-none bg-transparent cursor-pointer transition-all hover:bg-gray-150 dark:hover:bg-dark-surface-light min-h-[40px]",
+                  "w-full px-3 py-2 text-left font-sans text-sm font-medium text-gray-700 dark:text-dark-text rounded-xl border-none bg-transparent cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-dark-surface-light min-h-[40px]",
                   selectedPreset === 'yesterday' && "bg-primary-50 dark:bg-primary-950/20 text-primary-700 dark:text-primary-400 font-semibold"
                 )}
                 onClick={() => handlePresetClick('yesterday')}
@@ -191,7 +191,7 @@ export const DateSelector = ({
               <button
                 type="button"
                 className={cn(
-                  "w-full px-3 py-2 text-left font-sans text-sm font-medium text-gray-700 dark:text-dark-text rounded-xl border-none bg-transparent cursor-pointer transition-all hover:bg-gray-150 dark:hover:bg-dark-surface-light min-h-[40px]",
+                  "w-full px-3 py-2 text-left font-sans text-sm font-medium text-gray-700 dark:text-dark-text rounded-xl border-none bg-transparent cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-dark-surface-light min-h-[40px]",
                   selectedPreset === 'last7days' && "bg-primary-50 dark:bg-primary-950/20 text-primary-700 dark:text-primary-400 font-semibold"
                 )}
                 onClick={() => handlePresetClick('last7days')}
@@ -201,7 +201,7 @@ export const DateSelector = ({
               <button
                 type="button"
                 className={cn(
-                  "w-full px-3 py-2 text-left font-sans text-sm font-medium text-gray-700 dark:text-dark-text rounded-xl border-none bg-transparent cursor-pointer transition-all hover:bg-gray-150 dark:hover:bg-dark-surface-light min-h-[40px]",
+                  "w-full px-3 py-2 text-left font-sans text-sm font-medium text-gray-700 dark:text-dark-text rounded-xl border-none bg-transparent cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-dark-surface-light min-h-[40px]",
                   selectedPreset === 'last30days' && "bg-primary-50 dark:bg-primary-950/20 text-primary-700 dark:text-primary-400 font-semibold"
                 )}
                 onClick={() => handlePresetClick('last30days')}

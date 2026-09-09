@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn, expect, userEvent, within } from 'storybook/test';
 import ConfirmDialog from './ConfirmDialog';
 
 const meta: Meta<typeof ConfirmDialog> = {
-  title: 'Components/ConfirmDialog',
+  title: 'Components/Overlays/ConfirmDialog',
   component: ConfirmDialog,
   parameters: {
     layout: 'centered',
@@ -28,6 +29,10 @@ const meta: Meta<typeof ConfirmDialog> = {
       control: 'boolean',
     },
   },
+  args: {
+    onClose: fn(),
+    onConfirm: fn(),
+  },
 };
 
 export default meta;
@@ -36,12 +41,16 @@ type Story = StoryObj<typeof ConfirmDialog>;
 export const Default: Story = {
   args: {
     isOpen: true,
-    title: 'Excluir Item',
-    message: 'Tem certeza de que deseja excluir este item permanentemente? Esta ação não poderá ser desfeita.',
+    title: 'Excluir Gravação',
+    message: 'Tem certeza de que deseja excluir este replay permanentemente? Esta ação liberará espaço no disco.',
     confirmText: 'Excluir',
     cancelText: 'Cancelar',
-    onClose: () => alert('Closed clicked'),
-    onConfirm: () => alert('Confirm clicked'),
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const cancelBtn = canvas.getByRole('button', { name: /cancelar/i });
+    await userEvent.click(cancelBtn);
+    await expect(args.onClose).toHaveBeenCalled();
   },
 };
 

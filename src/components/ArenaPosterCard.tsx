@@ -60,7 +60,7 @@ export function ArenaPosterCard({
     <div
       onClick={() => onClick?.(arena)}
       className={cn(
-        'group relative h-56 sm:h-72 md:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-150/40 dark:border-dark-border/40 shadow-md hover:shadow-xl dark:shadow-none bg-white dark:bg-dark-surface cursor-pointer select-none transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.01] active:scale-[0.99]',
+        'group relative h-56 sm:h-72 md:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-200/60 dark:border-dark-border/40 shadow-md hover:shadow-xl dark:shadow-none bg-white dark:bg-dark-surface cursor-pointer select-none transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.01] active:scale-[0.99]',
         className
       )}
     >

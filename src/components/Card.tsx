@@ -13,7 +13,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          'bg-white dark:bg-dark-surface border border-gray-150 dark:border-dark-border rounded-2xl shadow-xs transition-all duration-200 overflow-hidden',
+          'bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border rounded-2xl shadow-xs transition-all duration-200 overflow-hidden',
           padded && 'p-5 sm:p-6',
           hoverable && 'hover:shadow-md hover:-translate-y-0.5 cursor-pointer',
           className

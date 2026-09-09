@@ -84,12 +84,12 @@ export function ShareLinkModal({
     >
       <div
         className={cn(
-          'bg-white dark:bg-dark-surface rounded-3xl shadow-2xl border border-gray-150 dark:border-dark-border w-full max-w-lg overflow-hidden flex flex-col',
+          'bg-white dark:bg-dark-surface rounded-3xl shadow-2xl border border-gray-200 dark:border-dark-border w-full max-w-lg overflow-hidden flex flex-col',
           className
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-150 dark:border-dark-border bg-gray-50/50 dark:bg-dark-surface-light/50">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-dark-border bg-gray-50/50 dark:bg-dark-surface-light/50">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center">
               <QrCode className="w-5 h-5" />
@@ -123,7 +123,7 @@ export function ShareLinkModal({
         {/* Body */}
         <div className="p-6 space-y-6 overflow-y-auto">
           {/* Card com QR Code */}
-          <div className="p-6 rounded-3xl bg-gradient-to-b from-gray-50 to-purple-50/40 dark:from-dark-surface-light dark:to-dark-surface border border-gray-150 dark:border-dark-border flex flex-col items-center text-center space-y-4">
+          <div className="p-6 rounded-3xl bg-gradient-to-b from-gray-50 to-purple-50/40 dark:from-dark-surface-light dark:to-dark-surface border border-gray-200 dark:border-dark-border flex flex-col items-center text-center space-y-4">
             <div className="space-y-1">
               <div className="inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-wider text-purple-600 dark:text-purple-400">
                 <Sparkles className="w-3.5 h-3.5" /> Escaneie para se cadastrar

@@ -145,7 +145,7 @@ export function VideoCard({
   return (
     <article
       className={cn(
-        'group relative flex flex-col bg-white dark:bg-dark-surface rounded-2xl shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-150 dark:border-dark-border',
+        'group relative flex flex-col bg-white dark:bg-dark-surface rounded-2xl shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-200 dark:border-dark-border',
         className
       )}
     >

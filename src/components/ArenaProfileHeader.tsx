@@ -59,7 +59,7 @@ export function ArenaProfileHeader({
   return (
     <div
       className={cn(
-        'bg-gradient-to-br from-primary-500/10 via-transparent to-transparent border border-gray-150 dark:border-dark-border/40 p-4 sm:p-5 rounded-2xl mb-3 sm:mb-4 shadow-xs flex flex-row justify-between items-center gap-4 select-none',
+        'bg-gradient-to-br from-primary-500/10 via-transparent to-transparent border border-gray-200 dark:border-dark-border/40 p-4 sm:p-5 rounded-2xl mb-3 sm:mb-4 shadow-xs flex flex-row justify-between items-center gap-4 select-none',
         className
       )}
     >

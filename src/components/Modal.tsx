@@ -38,7 +38,7 @@ export function Modal({ isOpen, onClose, title, children, footer, size = 'md', c
       <div className="fixed inset-0" onClick={closeOnOutsideClick ? onClose : undefined} />
       <div
         className={cn(
-          "relative w-full bg-white dark:bg-dark-surface border border-gray-150 dark:border-dark-border rounded-xl shadow-xl overflow-hidden flex flex-col max-h-[90vh] z-10 animate-[slideUp_0.2s_ease-out]",
+          "relative w-full bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border rounded-xl shadow-xl overflow-hidden flex flex-col max-h-[90vh] z-10 animate-[slideUp_0.2s_ease-out]",
           sizeClasses[size]
         )}
       >

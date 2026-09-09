@@ -30,7 +30,7 @@ export function StepCards({ steps, columns = 4, className }: StepCardsProps) {
         return (
           <div
             key={idx}
-            className="relative p-6 rounded-3xl border border-gray-150/40 dark:border-dark-border/40 bg-white dark:bg-dark-surface hover:shadow-md transition-all duration-300 flex flex-col gap-4 text-center md:text-left hover:-translate-y-1"
+            className="relative p-6 rounded-3xl border border-gray-200/60 dark:border-dark-border/40 bg-white dark:bg-dark-surface hover:shadow-md transition-all duration-300 flex flex-col gap-4 text-center md:text-left hover:-translate-y-1"
           >
             {/* Ícone e Número grande em marca d'água */}
             <div className="flex items-center justify-center md:justify-between w-full">

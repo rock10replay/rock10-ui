@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap');
+
 @import "tailwindcss/theme.css";
 @import "tailwindcss/utilities.css";
 
@@ -36,6 +38,7 @@
 
   /* Light Theme Neutral Utilities */
   --color-gray-150: #EEF2F6;
+  --color-gray-200: #E2E8F0;
 }
 
 @keyframes fadeIn {

@@ -115,7 +115,7 @@ export const SearchBar = ({
         <button
           type="button"
           className={cn(
-            "flex items-center justify-center mr-3 bg-gray-150 dark:bg-dark-surface-light border-none rounded-full cursor-pointer text-gray-500 dark:text-dark-text-muted transition-all duration-150 flex-shrink-0 hover:bg-gray-200 dark:hover:bg-dark-surface-light/80 hover:scale-105 active:scale-95",
+            "flex items-center justify-center mr-3 bg-gray-100 dark:bg-dark-surface-light border-none rounded-full cursor-pointer text-gray-500 dark:text-dark-text-muted transition-all duration-150 flex-shrink-0 hover:bg-gray-200 dark:hover:bg-dark-surface-light/80 hover:scale-105 active:scale-95",
             size === 'sm' ? "w-5 h-5 p-0.5" : size === 'md' ? "w-6 h-6 p-1" : "w-7 h-7 p-1.5"
           )}
           onClick={handleClear}

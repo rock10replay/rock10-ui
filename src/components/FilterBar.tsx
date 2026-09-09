@@ -22,7 +22,7 @@ export function FilterBar({
   return (
     <div
       className={cn(
-        'bg-white dark:bg-dark-surface p-4 sm:p-5 rounded-2xl border border-gray-150 dark:border-dark-border shadow-xs space-y-3',
+        'bg-white dark:bg-dark-surface p-4 sm:p-5 rounded-2xl border border-gray-200 dark:border-dark-border shadow-xs space-y-3',
         className
       )}
     >

@@ -86,7 +86,7 @@ export const VideoPreviewModal: React.FC<VideoPreviewModalProps> = ({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-dark-surface border border-gray-150 dark:border-dark-border rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+        className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border rounded-3xl shadow-2xl overflow-hidden flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

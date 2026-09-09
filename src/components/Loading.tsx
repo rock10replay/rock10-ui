@@ -34,7 +34,7 @@ export const Loading = ({
     return (
       <div 
         className={cn(
-          "w-full bg-white dark:bg-dark-surface border border-gray-150 dark:border-dark-border rounded-xl overflow-hidden shadow-sm animate-pulse",
+          "w-full bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border rounded-xl overflow-hidden shadow-sm animate-pulse",
           size === 'sm' ? 'max-w-xs' : size === 'md' ? 'max-w-sm' : 'max-w-md'
         )}
       >

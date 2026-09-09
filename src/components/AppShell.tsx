@@ -38,7 +38,7 @@ export function AppShell({
       {/* Sidebar Desktop e Mobile */}
       <aside
         className={cn(
-          'fixed left-0 top-0 bottom-0 w-[260px] bg-white dark:bg-dark-surface border-r border-gray-150 dark:border-dark-border flex flex-col z-50 transition-transform duration-300 ease-in-out md:translate-x-0',
+          'fixed left-0 top-0 bottom-0 w-[260px] bg-white dark:bg-dark-surface border-r border-gray-200 dark:border-dark-border flex flex-col z-50 transition-transform duration-300 ease-in-out md:translate-x-0',
           open ? 'translate-x-0' : '-translate-x-full'
         )}
       >
@@ -63,7 +63,7 @@ export function AppShell({
         </main>
 
         {footer && (
-          <footer className="w-full py-4 px-6 text-center text-xs font-semibold text-gray-400 border-t border-gray-150 dark:border-dark-border bg-white/50 dark:bg-dark-surface/50">
+          <footer className="w-full py-4 px-6 text-center text-xs font-semibold text-gray-400 border-t border-gray-200 dark:border-dark-border bg-white/50 dark:bg-dark-surface/50">
             {footer}
           </footer>
         )}
@@ -90,7 +90,7 @@ export function AppHeader({
   return (
     <header
       className={cn(
-        'sticky top-0 z-40 w-full h-16 bg-white/80 dark:bg-dark-surface/80 backdrop-blur-md border-b border-gray-150 dark:border-dark-border px-4 md:px-6 flex items-center justify-between transition-colors',
+        'sticky top-0 z-40 w-full h-16 bg-white/80 dark:bg-dark-surface/80 backdrop-blur-md border-b border-gray-200 dark:border-dark-border px-4 md:px-6 flex items-center justify-between transition-colors',
         className
       )}
     >
@@ -134,7 +134,7 @@ export interface AppSidebarProps {
 export function AppSidebar({ brand, children, footer, className, onNavigate }: AppSidebarProps) {
   return (
     <div className={cn('flex flex-col h-full', className)}>
-      <div className="h-16 flex items-center px-6 border-b border-gray-150 dark:border-dark-border shrink-0">
+      <div className="h-16 flex items-center px-6 border-b border-gray-200 dark:border-dark-border shrink-0">
         {brand}
       </div>
 
@@ -143,7 +143,7 @@ export function AppSidebar({ brand, children, footer, className, onNavigate }: A
       </nav>
 
       {footer && (
-        <div className="p-4 border-t border-gray-150 dark:border-dark-border shrink-0">
+        <div className="p-4 border-t border-gray-200 dark:border-dark-border shrink-0">
           {footer}
         </div>
       )}

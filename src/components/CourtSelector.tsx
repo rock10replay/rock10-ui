@@ -32,7 +32,7 @@ export function CourtSelector<T extends CourtItem = CourtItem>({
   return (
     <div
       className={cn(
-        'border-b border-gray-150 dark:border-dark-border/40 transition-all duration-200 select-none',
+        'border-b border-gray-200 dark:border-dark-border/40 transition-all duration-200 select-none',
         isCollapsed ? 'mb-3 sm:mb-4 pb-1.5 sm:pb-2' : 'mb-5 sm:mb-6 pb-3 sm:pb-4',
         className
       )}

@@ -68,7 +68,7 @@ export const HighlightVideoCard: React.FC<HighlightVideoCardProps> = ({
   return (
     <div
       className={cn(
-        'bg-white dark:bg-dark-surface border border-gray-150 dark:border-dark-border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between border-l-4',
+        'bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between border-l-4',
         cfg.border,
         className
       )}

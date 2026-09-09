@@ -69,7 +69,7 @@ export function ReceiptModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto print:p-0 print:bg-white print:static animate-in fade-in duration-200">
       <div className="bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border rounded-3xl max-w-2xl w-full shadow-2xl overflow-hidden print:border-none print:shadow-none print:max-w-none">
         {/* Header (Oculto na Impressão) */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-150 dark:border-dark-border bg-gray-50 dark:bg-dark-surface-light print:hidden">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-dark-border bg-gray-50 dark:bg-dark-surface-light print:hidden">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-emerald-600" />
             <h2 className="text-sm font-bold text-gray-900 dark:text-dark-text">

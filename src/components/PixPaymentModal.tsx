@@ -86,7 +86,7 @@ export function PixPaymentModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white dark:bg-dark-surface rounded-3xl border border-gray-150 dark:border-dark-border shadow-2xl max-w-md w-full overflow-hidden flex flex-col max-h-[90vh]">
+      <div className="bg-white dark:bg-dark-surface rounded-3xl border border-gray-200 dark:border-dark-border shadow-2xl max-w-md w-full overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
         <div className="p-5 border-b border-gray-100 dark:border-dark-border flex items-center justify-between bg-gradient-to-r from-emerald-600/10 via-teal-600/5 to-transparent">
           <div className="flex items-center gap-3">

@@ -34,14 +34,14 @@ export function ArenaCard({
     <div
       onClick={() => onClick?.(arena)}
       className={cn(
-        'group bg-white dark:bg-dark-surface border border-gray-150 dark:border-dark-border rounded-2xl p-5 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between',
+        'group bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border rounded-2xl p-5 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between',
         className
       )}
     >
       <div className="space-y-4">
         {/* Topo do Card: Logo/Avatar e Status */}
         <div className="flex items-start justify-between gap-3">
-          <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-base shrink-0 overflow-hidden border border-blue-150 dark:border-blue-900/40">
+          <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-base shrink-0 overflow-hidden border border-blue-200 dark:border-blue-900/40">
             {arena.logo_url ? (
               <img src={arena.logo_url} alt={arena.nome} className="w-full h-full object-cover" />
             ) : (

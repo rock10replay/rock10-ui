@@ -1,8 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
+import { Star, Settings, Trash2, Search, Plus, Save } from 'lucide-react';
 import IconButton from './IconButton';
 
 const meta: Meta<typeof IconButton> = {
-  title: 'Components/IconButton',
+  title: 'Components/Actions/IconButton',
   component: IconButton,
   parameters: {
     layout: 'centered',
@@ -27,6 +29,9 @@ const meta: Meta<typeof IconButton> = {
       control: 'boolean',
     },
   },
+  args: {
+    onClick: fn(),
+  },
 };
 
 export default meta;
@@ -34,40 +39,40 @@ type Story = StoryObj<typeof IconButton>;
 
 export const Primary: Story = {
   args: {
-    icon: '⭐',
-    ariaLabel: 'Star button',
+    icon: <Star className="w-5 h-5 fill-white" />,
+    ariaLabel: 'Favoritar',
     variant: 'primary',
   },
 };
 
 export const Secondary: Story = {
   args: {
-    icon: '⚙️',
-    ariaLabel: 'Settings button',
+    icon: <Settings className="w-5 h-5" />,
+    ariaLabel: 'Configurações',
     variant: 'secondary',
   },
 };
 
 export const Danger: Story = {
   args: {
-    icon: '🗑️',
-    ariaLabel: 'Delete button',
+    icon: <Trash2 className="w-5 h-5" />,
+    ariaLabel: 'Excluir',
     variant: 'danger',
   },
 };
 
 export const Ghost: Story = {
   args: {
-    icon: '🔍',
-    ariaLabel: 'Search button',
+    icon: <Search className="w-5 h-5" />,
+    ariaLabel: 'Pesquisar',
     variant: 'ghost',
   },
 };
 
 export const Rounded: Story = {
   args: {
-    icon: '➕',
-    ariaLabel: 'Add button',
+    icon: <Plus className="w-5 h-5" />,
+    ariaLabel: 'Adicionar',
     variant: 'primary',
     rounded: true,
   },
@@ -75,8 +80,8 @@ export const Rounded: Story = {
 
 export const Loading: Story = {
   args: {
-    icon: '💾',
-    ariaLabel: 'Save button',
+    icon: <Save className="w-5 h-5" />,
+    ariaLabel: 'Salvando',
     variant: 'primary',
     loading: true,
   },

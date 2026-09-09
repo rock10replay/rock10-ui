@@ -18,7 +18,7 @@ export const TableContainer = forwardRef<HTMLDivElement, TableContainerProps>(
         ref={ref}
         className={cn(
           'w-full overflow-x-auto rounded-2xl bg-white dark:bg-dark-surface shadow-xs',
-          bordered && 'border border-gray-150 dark:border-dark-border',
+          bordered && 'border border-gray-200 dark:border-dark-border',
           className
         )}
         {...props}
@@ -44,7 +44,7 @@ export const TableHeader = forwardRef<
   <thead
     ref={ref}
     className={cn(
-      'bg-gray-50/80 dark:bg-dark-surface-light/80 border-b border-gray-150 dark:border-dark-border text-gray-600 dark:text-dark-text-muted text-xs uppercase font-bold tracking-wider',
+      'bg-gray-50/80 dark:bg-dark-surface-light/80 border-b border-gray-200 dark:border-dark-border text-gray-600 dark:text-dark-text-muted text-xs uppercase font-bold tracking-wider',
       className
     )}
     {...props}

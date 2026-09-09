@@ -118,7 +118,7 @@ export function StatCard({
   if (isLoading) {
     if (variant === 'horizontal' || variant === 'compact') {
       return (
-        <div className={cn("bg-white dark:bg-dark-surface p-4 rounded-2xl border border-gray-150 dark:border-dark-border shadow-xs flex items-center gap-4", className)}>
+        <div className={cn("bg-white dark:bg-dark-surface p-4 rounded-2xl border border-gray-200 dark:border-dark-border shadow-xs flex items-center gap-4", className)}>
           <Skeleton variant="circular" width={44} height={44} />
           <div className="flex-1 space-y-2">
             <Skeleton width="40%" height={12} />
@@ -129,7 +129,7 @@ export function StatCard({
     }
 
     return (
-      <div className={cn("bg-white dark:bg-dark-surface p-5 rounded-2xl border border-gray-150 dark:border-dark-border shadow-xs", className)}>
+      <div className={cn("bg-white dark:bg-dark-surface p-5 rounded-2xl border border-gray-200 dark:border-dark-border shadow-xs", className)}>
         <div className="flex items-center justify-between mb-3">
           <Skeleton width="50%" height={14} />
           <Skeleton variant="circular" width={40} height={40} />
@@ -150,7 +150,7 @@ export function StatCard({
       <div
         onClick={onClick}
         className={cn(
-          'bg-white dark:bg-dark-surface p-5 rounded-2xl border border-gray-150 dark:border-dark-border shadow-xs hover:shadow-sm transition-all flex items-center gap-4',
+          'bg-white dark:bg-dark-surface p-5 rounded-2xl border border-gray-200 dark:border-dark-border shadow-xs hover:shadow-sm transition-all flex items-center gap-4',
           onClick && 'cursor-pointer hover:-translate-y-0.5',
           className
         )}
@@ -187,7 +187,7 @@ export function StatCard({
       <div
         onClick={onClick}
         className={cn(
-          'bg-white dark:bg-dark-surface p-3.5 rounded-xl border border-gray-150 dark:border-dark-border shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3',
+          'bg-white dark:bg-dark-surface p-3.5 rounded-xl border border-gray-200 dark:border-dark-border shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3',
           onClick && 'cursor-pointer hover:-translate-y-0.5',
           className
         )}
@@ -225,7 +225,7 @@ export function StatCard({
     <div
       onClick={onClick}
       className={cn(
-        'bg-white dark:bg-dark-surface p-5 rounded-2xl border border-gray-150 dark:border-dark-border shadow-xs hover:shadow-sm transition-all',
+        'bg-white dark:bg-dark-surface p-5 rounded-2xl border border-gray-200 dark:border-dark-border shadow-xs hover:shadow-sm transition-all',
         onClick && 'cursor-pointer hover:-translate-y-0.5',
         className
       )}

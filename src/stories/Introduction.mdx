@@ -1,0 +1,73 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design System/Introdução" />
+
+# @rock10/ui — Design System & Component Library
+
+Bem-vindo ao Storybook oficial do **@rock10/ui**, a biblioteca de componentes compartilhada do ecossistema Rock10 Replay.
+
+---
+
+## 🎯 Visão Geral e Princípios
+
+O `@rock10/ui` foi projetado para entregar interfaces esportivas elegantes, com alta performance, acessibilidade e flexibilidade:
+
+- **Estética Esportiva & Moderna**: Paleta esportiva focada em verde vibrante, laranja de energia, fundos escuros refinados e micro-animações suaves.
+- **Tipagem Estrita em TypeScript**: Totalmente tipado com interfaces claras, aceitando uniões resilientes (`null | undefined`) para modelos de dados de API.
+- **Tailwind CSS v4 Nativo**: Desenvolvido sobre os novos recursos de `@theme` e variáveis CSS dinâmicas.
+- **Modularidade e Isolamento**: Subpath export isolado (`@rock10/ui/charts`) para garantir que bibliotecas pesadas de gráficos (como Recharts) não aumentem o bundle dos portais que usam apenas componentes atômicos.
+
+---
+
+## 📦 Instalação e Uso
+
+Para instalar o `@rock10/ui` em uma aplicação React:
+
+```bash
+npm install @rock10/ui lucide-react clsx tailwind-merge
+```
+
+### Importando Estilos Globais
+No arquivo principal da sua aplicação (ex: `main.tsx` ou `App.tsx`):
+
+```tsx
+import '@rock10/ui/dist/style.css';
+```
+
+### Exemplo Básico de Consumo
+
+```tsx
+import { Button, Card, CardHeader, CardTitle, CardContent, StatCard } from '@rock10/ui';
+
+export function Dashboard() {
+  return (
+    <div className="p-6 space-y-4">
+      <StatCard
+        title="Receita do Mês"
+        value="R$ 45.280,00"
+        change="+12.5%"
+        trend="up"
+      />
+      <Button variant="primary" size="md">
+        Novo Agendamento
+      </Button>
+    </div>
+  );
+}
+```
+
+---
+
+## 📊 Gráficos Opcionais (`@rock10/ui/charts`)
+
+Para componentes analíticos com gráficos pesados, instale `recharts` e importe a sub-entrada dedicada:
+
+```bash
+npm install recharts
+```
+
+```tsx
+import { TimelineDrilldownChart } from '@rock10/ui/charts';
+```
+
+Dessa forma, o seu bundle principal permanece enxuto e imune ao peso de renderização SVG/Canvas.

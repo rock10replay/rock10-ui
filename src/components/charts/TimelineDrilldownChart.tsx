@@ -270,7 +270,7 @@ export function TimelineDrilldownChart({
           </div>
 
           {layer !== 'hours' && (
-            <div className="mt-2.5 pt-2 border-t border-dashed border-gray-150 dark:border-dark-border/40 text-[10px] text-primary-600 dark:text-primary-400 font-medium text-center">
+            <div className="mt-2.5 pt-2 border-t border-dashed border-gray-200 dark:border-dark-border/40 text-[10px] text-primary-600 dark:text-primary-400 font-medium text-center">
               💡 Clique para detalhar {layer === 'months' ? 'os dias do mês' : 'as horas do dia'}
             </div>
           )}
@@ -281,7 +281,7 @@ export function TimelineDrilldownChart({
   };
 
   return (
-    <div className={cn('bg-white dark:bg-dark-surface p-6 rounded-2xl border border-gray-150 dark:border-dark-border shadow-sm space-y-5', className)}>
+    <div className={cn('bg-white dark:bg-dark-surface p-6 rounded-2xl border border-gray-200 dark:border-dark-border shadow-sm space-y-5', className)}>
       {/* Header com Navegação e Controles */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
