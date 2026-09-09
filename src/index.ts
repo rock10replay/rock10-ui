@@ -1,6 +1,7 @@
 // Export utils
 export { cn } from './utils/cn';
 export { cleanCpf, formatCpf, isValidCpf } from './utils/cpfValidator';
+export { getImageDimensions, lerDimensoesImagem, type ImageDimensions } from './utils/image';
 
 // Export atomic components
 export { Button, type ButtonProps } from './components/Button';
@@ -79,6 +80,7 @@ export { SponsorCarousel, type SponsorCarouselProps, type SponsorItem } from './
 export { LikeButton, type LikeButtonProps } from './components/LikeButton';
 export { DownloadButton, type DownloadButtonProps } from './components/DownloadButton';
 export { Logo, type LogoProps } from './components/Logo';
+export { ShareLinkModal, type ShareLinkModalProps } from './components/ShareLinkModal';
 
 // Export styles
 import './styles/theme.css';
