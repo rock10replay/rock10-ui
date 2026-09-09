@@ -51,6 +51,7 @@ export interface StatCardProps {
   subtitle?: ReactNode;
   icon?: ReactNode;
   color?: keyof typeof colorThemes;
+  variant?: 'default' | 'horizontal' | 'compact';
   isLoading?: boolean;
   animateValue?: boolean;
   className?: string;
@@ -63,6 +64,7 @@ export function StatCard({
   subtitle,
   icon,
   color = 'purple',
+  variant = 'default',
   isLoading = false,
   animateValue = true,
   className,
@@ -106,14 +108,95 @@ export function StatCard({
   }, [value, animateValue]);
 
   if (isLoading) {
+    if (variant === 'horizontal' || variant === 'compact') {
+      return (
+        <div className={cn("bg-white dark:bg-dark-surface p-4 rounded-2xl border border-gray-150 dark:border-dark-border shadow-xs flex items-center gap-4", className)}>
+          <Skeleton variant="circular" width={44} height={44} />
+          <div className="flex-1 space-y-2">
+            <Skeleton width="40%" height={12} />
+            <Skeleton width="60%" height={24} />
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div className="bg-white dark:bg-dark-surface p-5 rounded-2xl border border-gray-150 dark:border-dark-border shadow-xs">
+      <div className={cn("bg-white dark:bg-dark-surface p-5 rounded-2xl border border-gray-150 dark:border-dark-border shadow-xs", className)}>
         <div className="flex items-center justify-between mb-3">
           <Skeleton width="50%" height={14} />
           <Skeleton variant="circular" width={40} height={40} />
         </div>
         <Skeleton width="40%" height={32} className="my-2" />
         <Skeleton width="70%" height={12} />
+      </div>
+    );
+  }
+
+  const formattedValue =
+    typeof value === 'number' && !animateValue
+      ? value.toLocaleString('pt-BR')
+      : displayedValue;
+
+  if (variant === 'horizontal') {
+    return (
+      <div
+        onClick={onClick}
+        className={cn(
+          'bg-white dark:bg-dark-surface p-5 rounded-2xl border border-gray-150 dark:border-dark-border shadow-xs hover:shadow-sm transition-all flex items-center gap-4',
+          onClick && 'cursor-pointer hover:-translate-y-0.5',
+          className
+        )}
+      >
+        {icon && (
+          <div className={cn('p-3 rounded-xl flex items-center justify-center shrink-0', theme.bg)}>
+            {icon}
+          </div>
+        )}
+        <div className="min-w-0 flex-1">
+          <span className={cn('text-[11px] font-bold uppercase tracking-wider block truncate', theme.text)}>
+            {title}
+          </span>
+          <div className="text-2xl font-black text-gray-900 dark:text-dark-text leading-tight mt-0.5 truncate">
+            {formattedValue}
+          </div>
+          {subtitle && (
+            <div className="text-xs text-gray-500 dark:text-dark-text-muted font-medium mt-0.5 truncate">
+              {subtitle}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (variant === 'compact') {
+    return (
+      <div
+        onClick={onClick}
+        className={cn(
+          'bg-white dark:bg-dark-surface p-3.5 rounded-xl border border-gray-150 dark:border-dark-border shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3',
+          onClick && 'cursor-pointer hover:-translate-y-0.5',
+          className
+        )}
+      >
+        <div className="min-w-0 flex-1">
+          <span className={cn('text-[10px] font-bold uppercase tracking-wider block truncate', theme.text)}>
+            {title}
+          </span>
+          <div className="text-xl font-black text-gray-900 dark:text-dark-text leading-tight mt-0.5 truncate">
+            {formattedValue}
+          </div>
+          {subtitle && (
+            <div className="text-[11px] text-gray-500 dark:text-dark-text-muted font-medium mt-0.5 truncate">
+              {subtitle}
+            </div>
+          )}
+        </div>
+        {icon && (
+          <div className={cn('w-9 h-9 rounded-lg flex items-center justify-center shrink-0', theme.bg)}>
+            {icon}
+          </div>
+        )}
       </div>
     );
   }
@@ -139,9 +222,7 @@ export function StatCard({
       </div>
 
       <div className="text-3xl font-black text-gray-900 dark:text-dark-text tracking-tight">
-        {typeof value === 'number' && !animateValue
-          ? value.toLocaleString('pt-BR')
-          : displayedValue}
+        {formattedValue}
       </div>
 
       {subtitle && (

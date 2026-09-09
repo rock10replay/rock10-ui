@@ -1,8 +1,10 @@
 // Export utils
 export { cn } from './utils/cn';
+export { cleanCpf, formatCpf, isValidCpf } from './utils/cpfValidator';
 
 // Export atomic components
 export { Button, type ButtonProps } from './components/Button';
+export { CopyButton, type CopyButtonProps } from './components/CopyButton';
 export { Input, type InputProps } from './components/Input';
 export { Select, type SelectProps, type SelectOption } from './components/Select';
 export { Textarea, type TextareaProps } from './components/Textarea';
@@ -27,6 +29,14 @@ export {
   type CardContentProps,
   type CardFooterProps,
 } from './components/Card';
+export {
+  AppShell,
+  AppHeader,
+  AppSidebar,
+  type AppShellProps,
+  type AppHeaderProps,
+  type AppSidebarProps,
+} from './components/AppShell';
 export { StatCard, type StatCardProps } from './components/StatCard';
 export { Alert, type AlertProps } from './components/Alert';
 export {
@@ -56,6 +66,7 @@ export { HeroBanner, type HeroBannerProps, type HeroAction } from './components/
 export { BannerCTA, type BannerCTAProps } from './components/BannerCTA';
 export { StepCards, type StepCardsProps, type StepItem } from './components/StepCards';
 export { CourtSelector, type CourtSelectorProps, type CourtItem } from './components/CourtSelector';
+export { Pagination, type PaginationProps } from './components/Pagination';
 
 // Export domain components
 export { VideoCard, type VideoCardProps, type VideoData } from './components/VideoCard';
