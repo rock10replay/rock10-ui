@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import {
   ResponsiveContainer,
   LineChart,
@@ -141,7 +141,20 @@ export function TimelineDrilldownChart({
     });
   };
 
-  const loadTimeline = async () => {
+  // Reset layers if data fetcher function changes (e.g. filter by arena/group changed)
+  const prevFetchDataRef = useRef(onFetchData);
+  useEffect(() => {
+    if (prevFetchDataRef.current !== onFetchData) {
+      prevFetchDataRef.current = onFetchData;
+      setLayer('months');
+      setSelectedMonth(null);
+      setSelectedMonthLabel('');
+      setSelectedDay(null);
+      setSelectedDayLabel('');
+    }
+  }, [onFetchData]);
+
+  const loadTimeline = useCallback(async () => {
     try {
       setLoading(true);
       const items = await onFetchData({
@@ -156,11 +169,11 @@ export function TimelineDrilldownChart({
     } finally {
       setLoading(false);
     }
-  };
+  }, [onFetchData, selectedYear, showComparison, compareYear, selectedMonth, selectedDay]);
 
   useEffect(() => {
     loadTimeline();
-  }, [selectedYear, compareYear, selectedMonth, selectedDay, showComparison]);
+  }, [loadTimeline]);
 
   // Handlers de Drill-Down
   const handlePointClick = (entry: any) => {
