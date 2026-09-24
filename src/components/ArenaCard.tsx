@@ -13,6 +13,10 @@ export interface ArenaData {
   banner_url?: string;
   total_quadras?: number;
   ativo?: boolean;
+  is_online?: boolean;
+  status_conexao?: 'online' | 'offline';
+  ultimo_ping?: string | null;
+  minutos_offline?: number | null;
 }
 
 export interface ArenaCardProps {

@@ -83,6 +83,14 @@ export function ArenaPosterCard({
         </div>
       ) : null}
 
+      {/* Marcação de Arena Offline no Canto Superior Direito */}
+      {(arena.is_online === false || arena.status_conexao === 'offline') && (
+        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-600/95 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold shadow-md border border-rose-300/40 tracking-wider uppercase animate-fadeIn select-none">
+          <span className="w-1.5 h-1.5 rounded-full bg-white shadow-xs shrink-0" />
+          Offline
+        </div>
+      )}
+
       {/* Imagem de Fundo com gradiente escuro */}
       <div className="absolute inset-0 z-0">
         <img

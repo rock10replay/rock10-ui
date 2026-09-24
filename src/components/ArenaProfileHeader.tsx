@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactNode } from 'react';
-import { MapPin, Trophy, Share2, Check, Map } from 'lucide-react';
+import { MapPin, Trophy, Share2, Check, Map, LayoutGrid } from 'lucide-react';
 import { cn } from '../utils/cn';
 import type { ArenaData } from './ArenaCard';
 
@@ -81,9 +81,29 @@ export function ArenaProfileHeader({
 
         {/* Informações da Arena */}
         <div className="min-w-0 flex-1">
-          <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-gray-800 dark:text-dark-text mb-1 m-0 break-words whitespace-normal leading-tight">
-            {arena.nome}
-          </h1>
+          <div className="flex items-center gap-2.5 mb-1.5 flex-wrap">
+            <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-gray-800 dark:text-dark-text m-0 break-words whitespace-normal leading-tight">
+              {arena.nome}
+            </h1>
+            {arena.is_online !== undefined && (
+              <span
+                className={cn(
+                  'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider select-none shrink-0',
+                  arena.is_online
+                    ? 'text-emerald-700 dark:text-emerald-300 bg-emerald-500/10 border border-emerald-500/20'
+                    : 'text-rose-700 dark:text-rose-300 bg-rose-500/10 border border-rose-500/20'
+                )}
+              >
+                <span
+                  className={cn(
+                    'w-1.5 h-1.5 rounded-full shrink-0',
+                    arena.is_online ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'
+                  )}
+                />
+                {arena.is_online ? 'Online' : 'Offline'}
+              </span>
+            )}
+          </div>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500 dark:text-dark-text-muted">
             {(arena.cidade || arena.uf) && (
               <div className="flex items-center gap-1">
@@ -97,7 +117,7 @@ export function ArenaProfileHeader({
             )}
             {courtsCount !== undefined && courtsCount > 0 && (
               <div className="flex items-center gap-1.5 pl-3 border-l border-gray-200 dark:border-dark-border/40">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                <LayoutGrid className="w-3.5 h-3.5 text-primary-500 shrink-0" />
                 <span>
                   {courtsCount} {courtsCount === 1 ? 'quadra' : 'quadras'}
                 </span>
