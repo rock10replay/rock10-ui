@@ -64,32 +64,24 @@ export function ArenaPosterCard({
         className
       )}
     >
-      {/* Barra de Badges do Topo (Ranking e Status de Conectividade) */}
-      <div className="absolute top-2.5 inset-x-2.5 sm:top-3.5 sm:inset-x-3.5 z-20 flex flex-wrap items-center justify-between gap-1.5 pointer-events-none select-none">
-        {rankBadge ? (
-          <div className="pointer-events-auto animate-fadeIn">{rankBadge}</div>
-        ) : accessRank === 1 ? (
-          <div className="bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md flex items-center gap-1 animate-fadeIn border border-amber-300/30">
-            🔥 1ª mais acessada<span className="hidden sm:inline"> por você</span>
-          </div>
-        ) : accessRank === 2 ? (
-          <div className="bg-gradient-to-r from-sky-500 to-blue-600 text-white text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md flex items-center gap-1 animate-fadeIn border border-sky-300/30">
-            ⚡ 2ª mais acessada<span className="hidden sm:inline"> por você</span>
-          </div>
-        ) : isMostAccessed ? (
-          <div className="bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md flex items-center gap-1 animate-fadeIn border border-amber-300/30">
-            🔥 Mais acessada<span className="hidden sm:inline"> por você</span>
-          </div>
-        ) : null}
-
-        {/* Marcação de Arena Offline */}
-        {(arena.is_online === false || arena.status_conexao === 'offline') && (
-          <div className="ml-auto flex items-center gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-rose-600/95 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold shadow-md border border-rose-300/40 tracking-wider uppercase animate-fadeIn">
-            <span className="w-1.5 h-1.5 rounded-full bg-white shadow-xs shrink-0" />
-            Offline
-          </div>
-        )}
-      </div>
+      {/* Badges de Destaque / Ranking no Topo */}
+      {rankBadge ? (
+        <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 select-none animate-fadeIn">
+          {rankBadge}
+        </div>
+      ) : accessRank === 1 ? (
+        <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1 select-none animate-fadeIn border border-amber-300/30">
+          🔥 1ª mais acessada por você
+        </div>
+      ) : accessRank === 2 ? (
+        <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 bg-gradient-to-r from-sky-500 to-blue-600 text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1 select-none animate-fadeIn border border-sky-300/30">
+          ⚡ 2ª mais acessada por você
+        </div>
+      ) : isMostAccessed ? (
+        <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1 select-none animate-fadeIn border border-amber-300/30">
+          🔥 Mais acessada por você
+        </div>
+      ) : null}
 
       {/* Imagem de Fundo com gradiente escuro */}
       <div className="absolute inset-0 z-0">
@@ -106,6 +98,14 @@ export function ArenaPosterCard({
       {/* Conteúdo do Card */}
       <div className="relative z-10 h-full w-full p-4 sm:p-6 flex flex-col justify-end text-white">
         <div className="mb-2 sm:mb-4">
+          {/* Marcação de Arena Offline posicionada acima do nome */}
+          {(arena.is_online === false || arena.status_conexao === 'offline') && (
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-600/95 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold shadow-xs border border-rose-300/40 tracking-wider uppercase mb-1.5 select-none animate-fadeIn w-fit">
+              <span className="w-1.5 h-1.5 rounded-full bg-white shadow-xs shrink-0" />
+              Offline
+            </div>
+          )}
+
           <h3 className="text-sm sm:text-xl md:text-2xl font-heading font-extrabold tracking-tight group-hover:text-primary-400 transition-colors duration-200 line-clamp-2">
             {arena.nome}
           </h3>
