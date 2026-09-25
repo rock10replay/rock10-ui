@@ -83,6 +83,7 @@ export { Logo, type LogoProps } from './components/Logo';
 export { ShareLinkModal, type ShareLinkModalProps } from './components/ShareLinkModal';
 export { PixPaymentModal, type PixPaymentModalProps } from './components/PixPaymentModal';
 export { ReceiptModal, type ReceiptModalProps } from './components/ReceiptModal';
+export { StoriesOverlay, type StoriesOverlayProps } from './components/StoriesOverlay';
 
 // Export styles
 import './styles/theme.css';
