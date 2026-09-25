@@ -75,11 +75,11 @@ export function SegmentedControl<T extends string = string>({
             )}
           >
             {option.icon && <span className="shrink-0 flex items-center">{option.icon}</span>}
-            {option.mobileLabel ? (
-              <>
-                <span className="inline sm:hidden">{option.mobileLabel}</span>
+            {option.mobileLabel && option.mobileLabel !== option.label ? (
+              <span>
+                <span className="sm:hidden">{option.mobileLabel}</span>
                 <span className="hidden sm:inline">{option.label}</span>
-              </>
+              </span>
             ) : (
               <span>{option.label}</span>
             )}
