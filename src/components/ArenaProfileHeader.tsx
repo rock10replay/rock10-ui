@@ -65,42 +65,27 @@ export function ArenaProfileHeader({
   return (
     <div
       className={cn(
-        'relative bg-gradient-to-br from-primary-500/10 via-transparent to-transparent border border-gray-200 dark:border-dark-border/40 p-4 sm:p-5 rounded-2xl mb-3 sm:mb-4 shadow-xs select-none',
+        'bg-gradient-to-br from-primary-500/10 via-transparent to-transparent border border-gray-200 dark:border-dark-border/40 p-4 sm:p-5 rounded-2xl mb-3 sm:mb-4 shadow-xs flex flex-row justify-between items-center gap-3 sm:gap-4 select-none',
         className
       )}
     >
-      {/* Botão Escolher outra Arena no Mobile (no topo do card) */}
-      {onBack && (
-        <div className="flex sm:hidden items-center mb-2.5">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 sm:gap-3.5 text-left min-w-0 flex-1">
+        {/* Botão Escolher outra Arena (Apenas Seta dentro do Card - Topo no Mobile, Inline no Desktop) */}
+        {onBack && (
           <button
             type="button"
             onClick={onBack}
-            className="flex items-center justify-center w-8 h-8 rounded-xl border border-gray-200/80 dark:border-dark-border/60 bg-white/90 dark:bg-dark-surface/90 hover:bg-gray-100 dark:hover:bg-dark-surface-light text-gray-700 dark:text-dark-text active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation shrink-0"
+            className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-gray-200/80 dark:border-dark-border/60 bg-white/90 dark:bg-dark-surface/90 hover:bg-gray-100 dark:hover:bg-dark-surface-light text-gray-700 dark:text-dark-text active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation shrink-0"
             title="Escolher outra arena"
             aria-label="Escolher outra arena"
           >
             <ArrowLeft className="w-4 h-4 text-gray-600 dark:text-dark-text-muted" />
           </button>
-        </div>
-      )}
+        )}
 
-      <div className="flex flex-row justify-between items-center gap-3 sm:gap-4">
         <div className="flex items-center gap-2.5 sm:gap-3.5 text-left min-w-0 flex-1">
-          {/* Botão Escolher outra Arena no Desktop (Inline antes do Logo) */}
-          {onBack && (
-            <button
-              type="button"
-              onClick={onBack}
-              className="hidden sm:flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-gray-200/80 dark:border-dark-border/60 bg-white/90 dark:bg-dark-surface/90 hover:bg-gray-100 dark:hover:bg-dark-surface-light text-gray-700 dark:text-dark-text active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation shrink-0"
-              title="Escolher outra arena"
-              aria-label="Escolher outra arena"
-            >
-              <ArrowLeft className="w-4 h-4 text-gray-600 dark:text-dark-text-muted" />
-            </button>
-          )}
-
-        {/* Logo / Avatar */}
-        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-gray-200 dark:border-dark-border/60 shadow-xs shrink-0 bg-white flex items-center justify-center">
+          {/* Logo / Avatar */}
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-gray-200 dark:border-dark-border/60 shadow-xs shrink-0 bg-white flex items-center justify-center">
           {imgUrl ? (
             <img
               src={imgUrl}
@@ -161,6 +146,7 @@ export function ArenaProfileHeader({
           </div>
         </div>
       </div>
+    </div>
 
       {/* Ações Sociais e Compartilhamento */}
       <div className="flex flex-col gap-1.5 shrink-0">
@@ -249,8 +235,7 @@ export function ArenaProfileHeader({
         {extraActions}
       </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default ArenaProfileHeader;
