@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactNode } from 'react';
-import { MapPin, Trophy, Share2, Check, Map, LayoutGrid } from 'lucide-react';
+import { MapPin, Trophy, Share2, Check, Map, LayoutGrid, ArrowLeft, Radio } from 'lucide-react';
 import { cn } from '../utils/cn';
 import type { ArenaData } from './ArenaCard';
 
@@ -10,6 +10,9 @@ export interface ArenaProfileHeaderProps {
   mapsUrl?: string;
   onShare?: () => void;
   shareCopied?: boolean;
+  onBack?: () => void;
+  onViewLives?: () => void;
+  hasActiveLives?: boolean;
   extraActions?: ReactNode;
   fallbackImage?: string;
   className?: string;
@@ -29,6 +32,9 @@ export function ArenaProfileHeader({
   mapsUrl,
   onShare,
   shareCopied = false,
+  onBack,
+  onViewLives,
+  hasActiveLives = false,
   extraActions,
   fallbackImage,
   className,
@@ -63,7 +69,20 @@ export function ArenaProfileHeader({
         className
       )}
     >
-      <div className="flex items-center gap-3.5 text-left min-w-0 flex-1">
+      <div className="flex items-center gap-2.5 sm:gap-3.5 text-left min-w-0 flex-1">
+        {/* Botão Escolher outra Arena (Apenas Seta dentro do Card) */}
+        {onBack && (
+          <button
+            type="button"
+            onClick={onBack}
+            className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-gray-200/80 dark:border-dark-border/60 bg-white/90 dark:bg-dark-surface/90 hover:bg-gray-100 dark:hover:bg-dark-surface-light text-gray-700 dark:text-dark-text active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation shrink-0"
+            title="Escolher outra arena"
+            aria-label="Escolher outra arena"
+          >
+            <ArrowLeft className="w-4 h-4 text-gray-600 dark:text-dark-text-muted" />
+          </button>
+        )}
+
         {/* Logo / Avatar */}
         <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-gray-200 dark:border-dark-border/60 shadow-xs shrink-0 bg-white flex items-center justify-center">
           {imgUrl ? (
@@ -129,6 +148,28 @@ export function ArenaProfileHeader({
 
       {/* Ações Sociais e Compartilhamento */}
       <div className="flex flex-col gap-1.5 shrink-0">
+        {/* Botão Ver Lives */}
+        {onViewLives && (
+          <button
+            type="button"
+            onClick={onViewLives}
+            className={cn(
+              'relative flex items-center justify-center gap-1.5 w-8 h-8 sm:w-auto sm:px-2.5 sm:h-8.5 rounded-lg border transition-all duration-200 shadow-xs cursor-pointer touch-manipulation active:scale-95 text-xs font-bold',
+              hasActiveLives
+                ? 'border-red-500 bg-red-600 text-white hover:bg-red-700 shadow-sm'
+                : 'border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light text-red-600 dark:text-red-400'
+            )}
+            title={hasActiveLives ? 'Arena com transmissão ao vivo! Ver lives' : 'Ver transmissões e lives da Arena'}
+            aria-label="Ver transmissões e lives da Arena"
+          >
+            <Radio className={cn('w-4 h-4 shrink-0', hasActiveLives ? 'text-white animate-pulse' : 'text-red-600 dark:text-red-400')} />
+            <span className="hidden sm:inline">Lives</span>
+            {hasActiveLives && (
+              <span className="w-2 h-2 rounded-full bg-white animate-ping absolute -top-0.5 -right-0.5" />
+            )}
+          </button>
+        )}
+
         {/* Botão de Compartilhar */}
         {onShare && (
           <button

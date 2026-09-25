@@ -9,6 +9,7 @@ export interface ArenaPosterCardProps {
   isMostAccessed?: boolean;
   accessRank?: 1 | 2;
   rankBadge?: ReactNode;
+  hasLive?: boolean;
   actionText?: string;
   onClick?: (arena: ArenaData) => void;
   fallbackImage?: string;
@@ -28,6 +29,7 @@ export function ArenaPosterCard({
   isMostAccessed,
   accessRank,
   rankBadge,
+  hasLive,
   actionText = 'Ver Replay',
   onClick,
   fallbackImage,
@@ -82,6 +84,14 @@ export function ArenaPosterCard({
           🔥 Mais acessada por você
         </div>
       ) : null}
+
+      {/* Badge AO VIVO no Topo Direito */}
+      {hasLive && (
+        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 bg-red-600/95 hover:bg-red-600 text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1.5 select-none animate-pulse border border-red-300/40 backdrop-blur-sm">
+          <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+          <span>AO VIVO</span>
+        </div>
+      )}
 
       {/* Imagem de Fundo com gradiente escuro */}
       <div className="absolute inset-0 z-0">
