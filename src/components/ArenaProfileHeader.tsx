@@ -11,6 +11,7 @@ export interface ArenaProfileHeaderProps {
   onShare?: () => void;
   shareCopied?: boolean;
   onBack?: () => void;
+  backTitle?: string;
   onViewLives?: () => void;
   hasActiveLives?: boolean;
   extraActions?: ReactNode;
@@ -33,6 +34,7 @@ export function ArenaProfileHeader({
   onShare,
   shareCopied = false,
   onBack,
+  backTitle = 'Escolher outra arena',
   onViewLives,
   hasActiveLives = false,
   extraActions,
@@ -70,14 +72,14 @@ export function ArenaProfileHeader({
       )}
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 sm:gap-3.5 text-left min-w-0 flex-1">
-        {/* Botão Escolher outra Arena (Apenas Seta dentro do Card - Topo no Mobile, Inline no Desktop) */}
+        {/* Botão Escolher outra Arena / Voltar (Apenas Seta dentro do Card - Topo no Mobile, Inline no Desktop) */}
         {onBack && (
           <button
             type="button"
             onClick={onBack}
             className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-gray-200/80 dark:border-dark-border/60 bg-white/90 dark:bg-dark-surface/90 hover:bg-gray-100 dark:hover:bg-dark-surface-light text-gray-700 dark:text-dark-text active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation shrink-0"
-            title="Escolher outra arena"
-            aria-label="Escolher outra arena"
+            title={backTitle}
+            aria-label={backTitle}
           >
             <ArrowLeft className="w-4 h-4 text-gray-600 dark:text-dark-text-muted" />
           </button>
