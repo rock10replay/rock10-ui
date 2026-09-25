@@ -83,9 +83,6 @@ export const StoriesOverlay: React.FC<StoriesOverlayProps> = ({
     }
   }, [videoDate]);
 
-  const isVerticalScreen = screenOrientation === 'vertical';
-  const isVerticalVideo = videoOrientation === 'vertical';
-
   return (
     <div
       className={cn(
@@ -119,36 +116,36 @@ export const StoriesOverlay: React.FC<StoriesOverlayProps> = ({
         </div>
 
         {/* Barra superior de marcas e informações */}
-        <div className="w-full flex items-center justify-between gap-3 pointer-events-auto">
+        <div className="w-full flex items-center justify-between gap-2 pointer-events-auto">
           {/* Lado Esquerdo: Identidade Dupla (Rock10 + Arena) */}
-          <div className="flex items-center gap-3 bg-black/45 hover:bg-black/60 backdrop-blur-md border border-white/10 px-3.5 py-2 rounded-2xl shadow-lg transition-colors">
+          <div className="flex items-center gap-2 sm:gap-3 bg-black/60 hover:bg-black/75 backdrop-blur-md border border-white/10 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-2xl shadow-xl transition-colors min-w-0 max-w-[68%] sm:max-w-none">
             {/* Logo Rock10 */}
             <div className="flex items-center shrink-0">
-              <Logo size="sm" themeMode="dark" className="h-6 sm:h-7 w-auto drop-shadow-sm" />
+              <Logo size="sm" themeMode="dark" className="h-5 sm:h-7 w-auto drop-shadow-sm" />
             </div>
 
-            <div className="h-5 w-[1px] bg-white/20 shrink-0" />
+            <div className="h-4 sm:h-5 w-[1px] bg-white/20 shrink-0" />
 
             {/* Logo e Nome da Arena */}
-            <div className="flex items-center gap-2 min-w-0">
+            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
               {arenaLogo ? (
                 <img
                   src={arenaLogo}
                   alt={arenaName}
-                  className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg object-contain bg-white/10 p-0.5 border border-white/20 shrink-0"
+                  className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg object-contain bg-white/10 p-0.5 border border-white/20 shrink-0"
                 />
               ) : (
-                <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold text-xs shrink-0">
-                  <Building2 className="w-4 h-4" />
+                <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold text-[10px] sm:text-xs shrink-0">
+                  <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
               )}
 
-              <div className="flex flex-col min-w-0 pr-1">
-                <span className="text-white text-xs sm:text-sm font-black tracking-tight truncate max-w-[130px] sm:max-w-[200px]">
+              <div className="flex flex-col min-w-0 pr-0.5">
+                <span className="text-white text-[11px] sm:text-sm font-black tracking-tight truncate">
                   {arenaName}
                 </span>
                 {courtName && (
-                  <span className="text-emerald-400 font-mono text-[10px] sm:text-xs font-semibold leading-tight truncate">
+                  <span className="text-emerald-400 font-mono text-[9px] sm:text-xs font-semibold leading-tight truncate">
                     {courtName}
                   </span>
                 )}
@@ -158,7 +155,7 @@ export const StoriesOverlay: React.FC<StoriesOverlayProps> = ({
             {/* Badge de Origem do Vídeo: Storage Local vs Nuvem */}
             <div
               className={cn(
-                'hidden md:flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border transition-colors',
+                'hidden md:flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border transition-colors shrink-0',
                 isCached
                   ? 'bg-emerald-950/70 border-emerald-500/40 text-emerald-300'
                   : 'bg-blue-950/70 border-blue-500/40 text-blue-300'
@@ -180,9 +177,9 @@ export const StoriesOverlay: React.FC<StoriesOverlayProps> = ({
           </div>
 
           {/* Lado Direito: Controles rápidos e Relógio */}
-          <div className="flex items-center gap-2 bg-black/45 backdrop-blur-md border border-white/10 p-1.5 rounded-2xl shadow-lg">
+          <div className="flex items-center gap-1 sm:gap-1.5 bg-black/60 backdrop-blur-md border border-white/10 p-1 sm:p-1.5 rounded-2xl shadow-xl shrink-0">
             {formattedDate && (
-              <span className="hidden sm:inline-block text-white/80 font-mono text-xs px-2.5 font-medium">
+              <span className="hidden xl:inline-block text-white/80 font-mono text-xs px-2 font-medium">
                 {formattedDate}
               </span>
             )}
@@ -191,11 +188,11 @@ export const StoriesOverlay: React.FC<StoriesOverlayProps> = ({
               <button
                 type="button"
                 onClick={onSwitchArena}
-                className="p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/15 active:scale-95 transition-all text-xs font-semibold flex items-center gap-1.5"
+                className="p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl text-white/80 hover:text-white hover:bg-white/15 active:scale-95 transition-all text-xs font-semibold flex items-center gap-1"
                 title="Trocar de Arena"
               >
-                <Building2 className="w-4 h-4" />
-                <span className="hidden lg:inline">Arenas</span>
+                <Building2 className="w-3.5 h-3.5" />
+                <span className="hidden md:inline">Arenas</span>
               </button>
             )}
 
@@ -203,10 +200,10 @@ export const StoriesOverlay: React.FC<StoriesOverlayProps> = ({
               <button
                 type="button"
                 onClick={onTogglePlay}
-                className="p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/15 active:scale-95 transition-all"
+                className="p-1.5 sm:p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/15 active:scale-95 transition-all"
                 title={isPlaying ? 'Pausar' : 'Reproduzir'}
               >
-                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 text-emerald-400 animate-pulse" />}
+                {isPlaying ? <Pause className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 animate-pulse" />}
               </button>
             )}
 
@@ -214,10 +211,10 @@ export const StoriesOverlay: React.FC<StoriesOverlayProps> = ({
               <button
                 type="button"
                 onClick={onToggleMute}
-                className="p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/15 active:scale-95 transition-all"
+                className="p-1.5 sm:p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/15 active:scale-95 transition-all"
                 title={isMuted ? 'Ativar Som' : 'Silenciar'}
               >
-                {isMuted ? <VolumeX className="w-4 h-4 text-amber-300" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
+                {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />}
               </button>
             )}
 
@@ -225,10 +222,10 @@ export const StoriesOverlay: React.FC<StoriesOverlayProps> = ({
               <button
                 type="button"
                 onClick={onRefresh}
-                className="p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/15 active:scale-95 transition-all"
+                className="p-1.5 sm:p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/15 active:scale-95 transition-all"
                 title="Sincronizar novos vídeos"
               >
-                <RefreshCw className="w-4 h-4" />
+                <RefreshCw className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </button>
             )}
 
@@ -236,10 +233,10 @@ export const StoriesOverlay: React.FC<StoriesOverlayProps> = ({
               <button
                 type="button"
                 onClick={onToggleFullscreen}
-                className="p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/15 active:scale-95 transition-all"
+                className="hidden sm:flex p-1.5 sm:p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/15 active:scale-95 transition-all"
                 title="Tela Cheia"
               >
-                <Maximize2 className="w-4 h-4" />
+                <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </button>
             )}
 
@@ -249,17 +246,17 @@ export const StoriesOverlay: React.FC<StoriesOverlayProps> = ({
       </div>
 
       {/* =========================================
-          MEIO: Setas de Navegação (Sensíveis ao toque)
+          MEIO: Setas de Navegação (Sensíveis ao toque, discretas)
           ========================================= */}
-      <div className="w-full flex items-center justify-between px-1 pointer-events-none">
+      <div className="w-full flex items-center justify-between px-0.5 pointer-events-none">
         {onPrevious ? (
           <button
             type="button"
             onClick={onPrevious}
-            className="pointer-events-auto p-3 sm:p-4 rounded-2xl bg-black/40 hover:bg-black/70 text-white/70 hover:text-white border border-white/10 backdrop-blur-md active:scale-90 transition-all shadow-xl -ml-2 sm:ml-0"
+            className="pointer-events-auto p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-black/30 hover:bg-black/70 text-white/60 hover:text-white border border-white/10 backdrop-blur-xs active:scale-90 transition-all shadow-md"
             title="Vídeo anterior"
           >
-            <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
+            <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
           </button>
         ) : <div />}
 
@@ -267,65 +264,98 @@ export const StoriesOverlay: React.FC<StoriesOverlayProps> = ({
           <button
             type="button"
             onClick={onNext}
-            className="pointer-events-auto p-3 sm:p-4 rounded-2xl bg-black/40 hover:bg-black/70 text-white/70 hover:text-white border border-white/10 backdrop-blur-md active:scale-90 transition-all shadow-xl -mr-2 sm:mr-0"
+            className="pointer-events-auto p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-black/30 hover:bg-black/70 text-white/60 hover:text-white border border-white/10 backdrop-blur-xs active:scale-90 transition-all shadow-md"
             title="Próximo vídeo"
           >
-            <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />
+            <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
           </button>
         ) : <div />}
       </div>
 
       {/* =========================================
-          RODAPÉ: Card de QR Code & Chamada Esportiva
+          RODAPÉ RESPONSIVO: Adaptável entre Desktop e Mobile
           ========================================= */}
-      <div className="w-full flex items-end justify-between gap-4 pointer-events-auto">
-        {/* Lado Esquerdo do Rodapé: Contador e Status */}
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2 bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-xl shadow-md text-white/90 text-xs font-mono">
-            <span className="font-bold text-emerald-400">
-              {currentIndex + 1}
-            </span>
-            <span className="text-white/40">/</span>
-            <span>{totalVideos}</span>
-            <span className="text-white/50 text-[10px] ml-1">LANCES</span>
+      <div className="w-full pointer-events-auto">
+        {/* Layout Mobile / Tela Vertical: Card consolidado de largura total sem overflow */}
+        <div className="sm:hidden w-full bg-black/80 backdrop-blur-md border border-emerald-500/30 p-2.5 rounded-2xl shadow-2xl flex items-center justify-between gap-3">
+          <div className="flex flex-col gap-1 min-w-0 flex-1">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <div className="flex items-center gap-1 bg-black/60 px-2 py-0.5 rounded-md border border-white/10 text-white font-mono text-[10px]">
+                <span className="font-bold text-emerald-400">{currentIndex + 1}</span>
+                <span className="text-white/40">/</span>
+                <span>{totalVideos}</span>
+                <span className="text-white/50 text-[9px] ml-0.5">REPLAYS</span>
+              </div>
+
+              {formattedDate && (
+                <span className="text-white/70 font-mono text-[9px] truncate">
+                  {formattedDate}
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-1 text-emerald-400 font-black text-[10px] tracking-wider uppercase mt-0.5">
+              <QrCodeIcon className="w-3 h-3 shrink-0" />
+              <span>Baixe seu Replay</span>
+            </div>
+
+            <p className="text-white/50 font-mono text-[9px] truncate">
+              rock10.com.br/{arenaSlug || 'arena'}
+            </p>
           </div>
 
-          {/* Badge para telas verticais com a data/hora */}
-          {formattedDate && (
-            <div className="sm:hidden bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1 rounded-xl text-white/80 text-[11px] font-mono">
-              {formattedDate}
-            </div>
-          )}
-        </div>
-
-        {/* Lado Direito do Rodapé: Card QR Code Esportivo da Arena */}
-        <div
-          className={cn(
-            'group bg-black/70 hover:bg-black/85 backdrop-blur-lg border border-emerald-500/30 hover:border-emerald-500/60 p-3 sm:p-3.5 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 max-w-[280px] sm:max-w-sm',
-            isVerticalScreen && !isVerticalVideo && 'w-full justify-center max-w-none'
-          )}
-        >
-          {/* Caixa do QR Code em fundo branco de alto contraste para leitura rápida */}
-          <div className="bg-white p-2 rounded-xl shadow-inner shrink-0 flex items-center justify-center border border-gray-100">
+          {/* QR Code compacto que cabe 100% no mobile sem vazar */}
+          <div className="bg-white p-1 rounded-xl shadow-inner shrink-0 flex items-center justify-center border border-gray-100">
             <QRCodeSVG
               value={finalQrUrl}
-              size={isVerticalScreen ? 72 : 84}
+              size={58}
               level="M"
               includeMargin={false}
             />
           </div>
+        </div>
 
-          <div className="flex flex-col justify-center min-w-0 pr-1">
-            <div className="flex items-center gap-1.5 text-emerald-400 font-black text-[11px] sm:text-xs tracking-wider uppercase mb-0.5">
-              <QrCodeIcon className="w-3.5 h-3.5 shrink-0" />
-              <span>Baixe seu Replay</span>
+        {/* Layout Desktop / Widescreen: Lado a lado com espaço generoso */}
+        <div className="hidden sm:flex items-end justify-between gap-4 w-full">
+          {/* Lado Esquerdo: Contador de Vídeos */}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 bg-black/60 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-xl shadow-lg text-white/90 text-xs font-mono">
+              <span className="font-bold text-emerald-400 text-sm">{currentIndex + 1}</span>
+              <span className="text-white/40">/</span>
+              <span>{totalVideos}</span>
+              <span className="text-white/50 text-[10px] ml-1">REPLAYS</span>
             </div>
-            <p className="text-white/90 text-xs sm:text-sm font-bold leading-tight">
-              Aponte a câmera
-            </p>
-            <p className="text-white/50 font-mono text-[10px] sm:text-xs truncate mt-0.5">
-              rock10.com.br/{arenaSlug || 'arena'}
-            </p>
+
+            {formattedDate && (
+              <div className="bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-xl text-white/80 text-[11px] font-mono">
+                {formattedDate}
+              </div>
+            )}
+          </div>
+
+          {/* Lado Direito: Card QR Code Esportivo com Alto Contraste */}
+          <div className="group bg-black/75 hover:bg-black/90 backdrop-blur-lg border border-emerald-500/30 hover:border-emerald-500/60 p-3 sm:p-3.5 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 max-w-[280px]">
+            <div className="bg-white p-2 rounded-xl shadow-inner shrink-0 flex items-center justify-center border border-gray-100">
+              <QRCodeSVG
+                value={finalQrUrl}
+                size={76}
+                level="M"
+                includeMargin={false}
+              />
+            </div>
+
+            <div className="flex flex-col justify-center min-w-0 pr-1">
+              <div className="flex items-center gap-1 text-emerald-400 font-black text-xs tracking-wider uppercase mb-0.5">
+                <QrCodeIcon className="w-3.5 h-3.5 shrink-0" />
+                <span>Baixe seu Replay</span>
+              </div>
+              <p className="text-white/90 text-xs font-bold leading-tight">
+                Aponte a câmera
+              </p>
+              <p className="text-white/50 font-mono text-[10px] truncate mt-0.5">
+                rock10.com.br/{arenaSlug || 'arena'}
+              </p>
+            </div>
           </div>
         </div>
       </div>
