@@ -15,13 +15,14 @@ export interface SegmentedControlProps<T extends string = string> {
   options: SegmentedControlOption<T>[];
   value: T;
   onChange: (value: T) => void;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
   className?: string;
 }
 
 const sizeClasses = {
-  sm: 'text-xs py-1.5 px-2.5 sm:px-3 gap-1 sm:gap-1.5 rounded-xl',
+  xs: 'text-[11px] py-1 px-1.5 sm:px-2.5 gap-1 rounded-lg',
+  sm: 'text-[11px] sm:text-xs py-1.5 px-1.5 sm:px-3 gap-1 sm:gap-1.5 rounded-xl',
   md: 'text-sm py-2 px-3 sm:px-4 gap-1.5 sm:gap-2 rounded-xl',
   lg: 'text-base py-2.5 px-4 sm:px-5 gap-2 rounded-2xl',
 };
