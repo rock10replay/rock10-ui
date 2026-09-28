@@ -151,14 +151,14 @@ export function ArenaProfileHeader({
     </div>
 
       {/* Ações Sociais e Compartilhamento */}
-      <div className="flex flex-col gap-1.5 shrink-0">
+      <div className="flex flex-col gap-1.5 shrink-0 sm:min-w-[124px]">
         {/* Botão Ver Lives */}
         {onViewLives && (
           <button
             type="button"
             onClick={onViewLives}
             className={cn(
-              'relative flex items-center justify-center gap-1.5 w-8 h-8 sm:w-auto sm:px-2.5 sm:h-8.5 rounded-lg border transition-all duration-200 shadow-xs cursor-pointer touch-manipulation active:scale-95 text-xs font-bold',
+              'relative flex items-center justify-center sm:justify-start gap-1.5 w-8 h-8 sm:w-full sm:px-2.5 sm:h-8.5 rounded-lg border transition-all duration-200 shadow-xs cursor-pointer touch-manipulation active:scale-95 text-xs font-bold',
               hasActiveLives
                 ? 'border-red-500 bg-red-600 text-white hover:bg-red-700 shadow-sm'
                 : 'border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light text-red-600 dark:text-red-400'
@@ -180,16 +180,24 @@ export function ArenaProfileHeader({
             type="button"
             onClick={onShare}
             className={cn(
-              'relative flex items-center justify-center w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-lg border transition-all duration-200 shadow-xs cursor-pointer touch-manipulation active:scale-95',
+              'relative flex items-center justify-center sm:justify-start gap-1.5 w-8 h-8 sm:w-full sm:px-2.5 sm:h-8.5 rounded-lg border transition-all duration-200 shadow-xs cursor-pointer touch-manipulation active:scale-95 text-xs font-semibold',
               shareCopied
-                ? 'border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                ? 'border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold'
                 : 'border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light text-blue-600 dark:text-blue-400'
             )}
             title={shareCopied ? 'Link copiado!' : 'Compartilhar link da Arena'}
+            aria-label="Compartilhar link da Arena"
           >
-            {shareCopied ? <Check className="w-4 h-4 text-emerald-500" /> : <Share2 className="w-4 h-4" />}
+            {shareCopied ? (
+              <Check className="w-4 h-4 shrink-0 text-emerald-500" />
+            ) : (
+              <Share2 className="w-4 h-4 shrink-0 text-blue-600 dark:text-blue-400" />
+            )}
+            <span className="hidden sm:inline whitespace-nowrap">
+              {shareCopied ? 'Copiado!' : 'Compartilhar'}
+            </span>
             {shareCopied && (
-              <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 text-[10px] font-extrabold bg-emerald-600 text-white px-2 py-0.5 rounded-md shadow-md whitespace-nowrap pointer-events-none z-10 animate-fadeIn">
+              <span className="sm:hidden absolute right-full mr-2 top-1/2 -translate-y-1/2 text-[10px] font-extrabold bg-emerald-600 text-white px-2 py-0.5 rounded-md shadow-md whitespace-nowrap pointer-events-none z-10 animate-fadeIn">
                 Copiado!
               </span>
             )}
@@ -202,11 +210,12 @@ export function ArenaProfileHeader({
             href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-lg border border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation"
+            className="flex items-center justify-center sm:justify-start gap-1.5 w-8 h-8 sm:w-full sm:px-2.5 sm:h-8.5 rounded-lg border border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation text-xs font-semibold text-gray-700 dark:text-dark-text"
             title="Instagram da Arena"
+            aria-label="Instagram da Arena"
           >
             <svg
-              className="w-4 h-4 text-pink-600 dark:text-pink-400"
+              className="w-4 h-4 shrink-0 text-pink-600 dark:text-pink-400"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -218,6 +227,7 @@ export function ArenaProfileHeader({
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
               <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
             </svg>
+            <span className="hidden sm:inline whitespace-nowrap">Instagram</span>
           </a>
         )}
 
@@ -227,10 +237,12 @@ export function ArenaProfileHeader({
             href={mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-lg border border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation"
+            className="flex items-center justify-center sm:justify-start gap-1.5 w-8 h-8 sm:w-full sm:px-2.5 sm:h-8.5 rounded-lg border border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation text-xs font-semibold text-gray-700 dark:text-dark-text"
             title="Como Chegar (Google Maps)"
+            aria-label="Como Chegar (Google Maps)"
           >
-            <Map className="w-4 h-4 text-primary-500" />
+            <Map className="w-4 h-4 shrink-0 text-primary-500" />
+            <span className="hidden sm:inline whitespace-nowrap">Como Chegar</span>
           </a>
         )}
 
