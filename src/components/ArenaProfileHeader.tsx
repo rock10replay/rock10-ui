@@ -67,12 +67,12 @@ export function ArenaProfileHeader({
   return (
     <div
       className={cn(
-        'bg-gradient-to-br from-primary-500/10 via-transparent to-transparent border border-gray-200 dark:border-dark-border/40 p-4 sm:p-5 rounded-2xl mb-3 sm:mb-4 shadow-xs flex flex-row justify-between items-center gap-3 sm:gap-4 select-none',
+        'bg-gradient-to-br from-primary-500/10 via-transparent to-transparent border border-gray-200 dark:border-dark-border/40 p-4 sm:p-5 rounded-2xl mb-3 sm:mb-4 shadow-xs flex flex-row justify-between items-start gap-3 sm:gap-4 select-none',
         className
       )}
     >
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 sm:gap-3.5 text-left min-w-0 flex-1">
-        {/* Botão Escolher outra Arena / Voltar (Apenas Seta dentro do Card - Topo no Mobile, Inline no Desktop) */}
+      <div className="flex flex-col items-start gap-2.5 sm:gap-3 text-left min-w-0 flex-1">
+        {/* Botão Escolher outra Arena / Voltar (Posicionado no Topo em todas as resoluções) */}
         {onBack && (
           <button
             type="button"
@@ -151,14 +151,14 @@ export function ArenaProfileHeader({
     </div>
 
       {/* Ações Sociais e Compartilhamento */}
-      <div className="flex flex-col gap-1.5 shrink-0 sm:min-w-[124px]">
+      <div className="flex flex-col items-end gap-1.5 shrink-0">
         {/* Botão Ver Lives */}
         {onViewLives && (
           <button
             type="button"
             onClick={onViewLives}
             className={cn(
-              'relative flex items-center justify-center sm:justify-start gap-1.5 w-8 h-8 sm:w-full sm:px-2.5 sm:h-8.5 rounded-lg border transition-all duration-200 shadow-xs cursor-pointer touch-manipulation active:scale-95 text-xs font-bold',
+              'relative inline-flex items-center justify-center gap-1.5 w-8 h-8 sm:w-auto sm:px-2.5 sm:h-8.5 rounded-lg border transition-all duration-200 shadow-xs cursor-pointer touch-manipulation active:scale-95 text-xs font-bold',
               hasActiveLives
                 ? 'border-red-500 bg-red-600 text-white hover:bg-red-700 shadow-sm'
                 : 'border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light text-red-600 dark:text-red-400'
@@ -167,7 +167,7 @@ export function ArenaProfileHeader({
             aria-label="Ver transmissões e lives da Arena"
           >
             <Radio className={cn('w-4 h-4 shrink-0', hasActiveLives ? 'text-white animate-pulse' : 'text-red-600 dark:text-red-400')} />
-            <span className="hidden sm:inline">Lives</span>
+            <span className="hidden sm:inline whitespace-nowrap">Lives</span>
             {hasActiveLives && (
               <span className="w-2 h-2 rounded-full bg-white animate-ping absolute -top-0.5 -right-0.5" />
             )}
@@ -180,7 +180,7 @@ export function ArenaProfileHeader({
             type="button"
             onClick={onShare}
             className={cn(
-              'relative flex items-center justify-center sm:justify-start gap-1.5 w-8 h-8 sm:w-full sm:px-2.5 sm:h-8.5 rounded-lg border transition-all duration-200 shadow-xs cursor-pointer touch-manipulation active:scale-95 text-xs font-semibold',
+              'relative inline-flex items-center justify-center gap-1.5 w-8 h-8 sm:w-auto sm:px-2.5 sm:h-8.5 rounded-lg border transition-all duration-200 shadow-xs cursor-pointer touch-manipulation active:scale-95 text-xs font-semibold',
               shareCopied
                 ? 'border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold'
                 : 'border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light text-blue-600 dark:text-blue-400'
@@ -210,7 +210,7 @@ export function ArenaProfileHeader({
             href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center sm:justify-start gap-1.5 w-8 h-8 sm:w-full sm:px-2.5 sm:h-8.5 rounded-lg border border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation text-xs font-semibold text-gray-700 dark:text-dark-text"
+            className="relative inline-flex items-center justify-center gap-1.5 w-8 h-8 sm:w-auto sm:px-2.5 sm:h-8.5 rounded-lg border border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation text-xs font-semibold text-gray-700 dark:text-dark-text"
             title="Instagram da Arena"
             aria-label="Instagram da Arena"
           >
@@ -237,7 +237,7 @@ export function ArenaProfileHeader({
             href={mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center sm:justify-start gap-1.5 w-8 h-8 sm:w-full sm:px-2.5 sm:h-8.5 rounded-lg border border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation text-xs font-semibold text-gray-700 dark:text-dark-text"
+            className="relative inline-flex items-center justify-center gap-1.5 w-8 h-8 sm:w-auto sm:px-2.5 sm:h-8.5 rounded-lg border border-gray-200 dark:border-dark-border/60 bg-white dark:bg-dark-surface hover:bg-gray-50 dark:hover:bg-dark-surface-light active:scale-95 transition-all duration-200 shadow-xs cursor-pointer touch-manipulation text-xs font-semibold text-gray-700 dark:text-dark-text"
             title="Como Chegar (Google Maps)"
             aria-label="Como Chegar (Google Maps)"
           >
