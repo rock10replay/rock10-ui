@@ -85,7 +85,7 @@ export function ReportViewerModal<T>({
       className="report-modal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex flex-col items-center justify-start p-2 sm:p-4 overflow-hidden"
     >
       {/* 1. BARRA DE FERRAMENTAS SUPERIOR (NÃO IMPRESSA) */}
-      <div className="no-print w-full max-w-6xl bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border rounded-t-2xl px-4 py-3 shadow-lg flex flex-wrap items-center justify-between gap-3">
+      <div className="report-toolbar-container no-print print:hidden w-full max-w-6xl bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border rounded-t-2xl px-4 py-3 shadow-lg flex flex-wrap items-center justify-between gap-3">
         {/* Esquerda: Identificação e Total de Páginas */}
         <div className="flex items-center gap-2">
           <div className="p-2 rounded-xl bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400">
@@ -232,7 +232,7 @@ export function ReportViewerModal<T>({
               className="report-page-wrapper flex flex-col items-center w-full"
             >
               {/* Indicador visual de folha em tela */}
-              <div className="no-print mb-2 text-xs font-semibold text-gray-300 flex items-center gap-2">
+              <div className="report-sheet-badge no-print print:hidden mb-2 text-xs font-semibold text-gray-300 flex items-center gap-2">
                 <span className="bg-gray-700/90 px-2.5 py-0.5 rounded-full border border-gray-600 text-[11px] shadow-xs">
                   Folha {page.pageNumber} de {page.totalPages}
                 </span>
@@ -307,14 +307,26 @@ export function ReportViewerModal<T>({
       {/* 3. ESTILO DE IMPRESSÃO DINÂMICO PARA SELEÇÃO RETRATO / PAISAGEM */}
       <style>{`
         @media print {
-          /* 1. Oculta completamente o aplicativo principal (#root) e tudo fora do modal */
+          /* 1. Oculta completamente o aplicativo principal (#root), barra de ferramentas e elementos de tela */
           #root,
           body > *:not(.report-modal-backdrop),
+          .report-toolbar-container,
+          .report-sheet-badge,
           .no-print,
+          .print\\:hidden,
           nav,
+          header:not(.report-header-container):not(.report-continuation-header),
           aside,
-          button {
+          button,
+          [role="dialog"] > div:first-child:not(.report-modal-scroll-area) {
             display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            max-height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            overflow: hidden !important;
           }
           @page {
             size: ${orientation === 'landscape' ? 'A4 landscape' : 'A4 portrait'} !important;
@@ -361,8 +373,8 @@ export function ReportViewerModal<T>({
             margin: 0 !important;
             padding: 0 !important;
             width: 100% !important;
-            page-break-after: always !important;
-            break-after: page !important;
+            page-break-after: auto !important;
+            break-after: auto !important;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
           }
@@ -384,17 +396,20 @@ export function ReportViewerModal<T>({
             break-inside: avoid !important;
             page-break-after: always !important;
             break-after: page !important;
+            overflow: hidden !important;
           }
           .a4-page.orientation-portrait {
             width: 210mm !important;
             height: 297mm !important;
             min-height: 297mm !important;
+            max-height: 297mm !important;
             padding: 10mm 12mm !important;
           }
           .a4-page.orientation-landscape {
             width: 297mm !important;
             height: 210mm !important;
             min-height: 210mm !important;
+            max-height: 210mm !important;
             padding: 10mm 12mm !important;
           }
           .a4-page:last-child {

@@ -32,28 +32,31 @@ function getLayoutHeights<T>(
   if (isLandscape) {
     return {
       usableHeight: 180, // 210mm - 20mm padding - 10mm footer
-      page1Header: 28 + (hasFilters ? 6 : 0),
-      continuationHeader: 8,
-      tableHeader: 8,
-      row: 7.2,
-      groupHeader: 8,
-      groupSubtotal: 8,
-      summary: (hasMetrics ? 20 : 0) + 16 + 10,
-      safetyBuffer: 8,
+      page1Header: 46 + (hasFilters ? 12 : 0),
+      continuationHeader: 12,
+      tableHeader: 8.5,
+      row: 8.5,
+      groupHeader: 8.5,
+      groupSubtotal: 8.5,
+      summary: (hasMetrics ? 26 : 0) + 18 + 10,
+      safetyBuffer: 12,
     };
   }
 
   // Portrait (297mm x 210mm)
+  // Usable height inside 10mm top + 10mm bottom padding: 277mm.
+  // Reserving 12mm for ReportFooter: 265mm available for content.
+  // Rows can wrap to 2 lines (dates, long quadra names), measuring ~9.8-10.0mm each in DOM.
   return {
-    usableHeight: 267, // 297mm - 20mm padding - 10mm footer
-    page1Header: 38 + (hasFilters ? 10 : 0),
-    continuationHeader: 8.5,
-    tableHeader: 8.0,
-    row: 7.4,
-    groupHeader: 8.5,
-    groupSubtotal: 8.5,
-    summary: (hasMetrics ? 24 : 0) + 18 + 10,
-    safetyBuffer: 10,
+    usableHeight: 265,
+    page1Header: 50 + (hasFilters ? 14 : 0), // 64mm with filters, 50mm without
+    continuationHeader: 12,
+    tableHeader: 9.0,
+    row: 10.0, // accurately accounts for 2-line wrapped cells and status badges
+    groupHeader: 9.0,
+    groupSubtotal: 9.0,
+    summary: (hasMetrics ? 26 : 0) + 20 + 12, // 58mm with metrics, 32mm without
+    safetyBuffer: 16,
   };
 }
 

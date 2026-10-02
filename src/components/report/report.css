@@ -49,13 +49,23 @@
   /* 2. Ocultar todos os elementos de tela e navegação (incluindo o app principal #root) */
   #root,
   body > *:not(.report-modal-backdrop),
+  .report-toolbar-container,
+  .report-sheet-badge,
   .no-print,
+  .print-hidden,
+  .print\\:hidden,
   nav,
-  header:not(.report-header-container),
+  header:not(.report-header-container):not(.report-continuation-header),
   aside,
-  button,
-  .print-hidden {
+  button {
     display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
   }
 
   /* 3. Desarmar modais, backdrops e scroll areas - FUNDAMENTAL PARA QUEBRA DE PÁGINA */
@@ -194,12 +204,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .a4-page.orientation-portrait {
   width: 210mm;
   min-height: 297mm;
   height: 297mm;
+  max-height: 297mm;
   padding: 10mm 12mm;
 }
 
@@ -207,6 +219,7 @@
   width: 297mm;
   min-height: 210mm;
   height: 210mm;
+  max-height: 210mm;
   padding: 10mm 12mm;
 }
 
