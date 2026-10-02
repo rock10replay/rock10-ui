@@ -31,29 +31,29 @@ function getLayoutHeights<T>(
 
   if (isLandscape) {
     return {
-      usableHeight: 182, // 210mm - 20mm padding - 8mm footer
-      page1Header: 26 + (hasFilters ? 6 : 0),
+      usableHeight: 180, // 210mm - 20mm padding - 10mm footer
+      page1Header: 28 + (hasFilters ? 6 : 0),
       continuationHeader: 8,
-      tableHeader: 7.5,
-      row: 6.2,
-      groupHeader: 7.5,
-      groupSubtotal: 7.5,
+      tableHeader: 8,
+      row: 7.2,
+      groupHeader: 8,
+      groupSubtotal: 8,
       summary: (hasMetrics ? 20 : 0) + 16 + 10,
-      safetyBuffer: 6,
+      safetyBuffer: 8,
     };
   }
 
   // Portrait (297mm x 210mm)
   return {
-    usableHeight: 270, // 297mm - 20mm padding - 7mm footer
-    page1Header: 34 + (hasFilters ? 8 : 0),
+    usableHeight: 267, // 297mm - 20mm padding - 10mm footer
+    page1Header: 38 + (hasFilters ? 10 : 0),
     continuationHeader: 8.5,
-    tableHeader: 7.5,
-    row: 6.2,
-    groupHeader: 8.0,
-    groupSubtotal: 8.0,
-    summary: (hasMetrics ? 22 : 0) + 18 + 10,
-    safetyBuffer: 8,
+    tableHeader: 8.0,
+    row: 7.4,
+    groupHeader: 8.5,
+    groupSubtotal: 8.5,
+    summary: (hasMetrics ? 24 : 0) + 18 + 10,
+    safetyBuffer: 10,
   };
 }
 

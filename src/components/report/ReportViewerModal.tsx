@@ -250,7 +250,7 @@ export function ReportViewerModal<T>({
                 } bg-white text-slate-900 shadow-2xl transition-all rounded-xs relative flex flex-col justify-between`}
               >
                 {/* Corpo do Documento da Folha */}
-                <div className="w-full flex-1 min-h-0 flex flex-col justify-start">
+                <div className="w-full flex-1 flex flex-col justify-start overflow-visible">
                   {/* Cabeçalho Oficial Rock 10 (Página 1) ou Cabeçalho de Continuação (Páginas 2+) */}
                   {page.isFirstPage ? (
                     <ReportHeader config={config} />

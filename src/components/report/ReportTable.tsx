@@ -24,7 +24,7 @@ export function ReportTable<T>({
   const hasMultipleGroups = groups.length > 1 || (groups.length === 1 && groups[0].groupKey !== 'all');
 
   return (
-    <div className={`report-table-wrapper w-full overflow-x-auto ${className}`}>
+    <div className={`report-table-wrapper w-full overflow-visible ${className}`}>
       <table className="w-full text-left border-collapse text-[10px] leading-tight">
         {/* Cabeçalho da Tabela - thead com repetição automática em quebras de página */}
         <thead className="table-header-group bg-gray-100 text-gray-800 uppercase font-black tracking-wider border-y-2 border-gray-300">
