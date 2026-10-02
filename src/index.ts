@@ -85,5 +85,33 @@ export { PixPaymentModal, type PixPaymentModalProps } from './components/PixPaym
 export { ReceiptModal, type ReceiptModalProps } from './components/ReceiptModal';
 export { StoriesOverlay, type StoriesOverlayProps } from './components/StoriesOverlay';
 
+// Export report & print components
+export {
+  ReportViewerModal,
+  type ReportViewerModalProps,
+  ReportHeader,
+  type ReportHeaderProps,
+  ReportMiniHeader,
+  ReportFooter,
+  type ReportFooterProps,
+  ReportTable,
+  type ReportTableProps,
+  ReportSummary,
+  type ReportSummaryProps,
+  useReportEngine,
+  type UseReportEngineReturn,
+  exportReportToCsv,
+  type ReportOrientation,
+  type ReportColumn,
+  type ReportGroupOption,
+  type ReportSortOption,
+  type ReportSummaryMetric,
+  type ReportEmitterInfo,
+  type ReportFilterBadge,
+  type ReportConfig,
+  type ReportGroupData,
+} from './components/report';
+
 // Export styles
 import './styles/theme.css';
+
