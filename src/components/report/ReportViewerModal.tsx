@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Printer,
   X,
@@ -52,6 +53,14 @@ export function ReportViewerModal<T>({
     triggerCsvExport,
   } = useReportEngine(data, config);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    document.body.classList.add('report-modal-open');
+    return () => {
+      document.body.classList.remove('report-modal-open');
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   // Monta opções de agrupamento para o select
@@ -69,7 +78,7 @@ export function ReportViewerModal<T>({
     label: s.label,
   }));
 
-  return (
+  const modalContent = (
     <div
       role="dialog"
       aria-modal="true"
@@ -298,6 +307,15 @@ export function ReportViewerModal<T>({
       {/* 3. ESTILO DE IMPRESSÃO DINÂMICO PARA SELEÇÃO RETRATO / PAISAGEM */}
       <style>{`
         @media print {
+          /* 1. Oculta completamente o aplicativo principal (#root) e tudo fora do modal */
+          #root,
+          body > *:not(.report-modal-backdrop),
+          .no-print,
+          nav,
+          aside,
+          button {
+            display: none !important;
+          }
           @page {
             size: ${orientation === 'landscape' ? 'A4 landscape' : 'A4 portrait'} !important;
             margin: 0 !important;
@@ -410,6 +428,12 @@ export function ReportViewerModal<T>({
       `}</style>
     </div>
   );
+
+  if (typeof document === 'undefined' || !document.body) {
+    return modalContent;
+  }
+
+  return createPortal(modalContent, document.body);
 }
 
 export default ReportViewerModal;

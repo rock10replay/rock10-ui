@@ -46,7 +46,9 @@
     overflow: visible !important;
   }
 
-  /* 2. Ocultar todos os elementos de tela e navegação */
+  /* 2. Ocultar todos os elementos de tela e navegação (incluindo o app principal #root) */
+  #root,
+  body > *:not(.report-modal-backdrop),
   .no-print,
   nav,
   header:not(.report-header-container),
