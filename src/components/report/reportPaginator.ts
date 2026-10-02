@@ -30,33 +30,35 @@ function getLayoutHeights<T>(
   const hasMetrics = Boolean(config.summaryMetrics && config.summaryMetrics.length > 0);
 
   if (isLandscape) {
+    // A4 Landscape: 297mm x 210mm.
+    // Usable height inside 10mm top + 10mm bottom padding: 190mm.
+    // Fills ~23-24 rows on Page 1 and ~28 rows on continuation pages right down to footer.
     return {
-      usableHeight: 180, // 210mm - 20mm padding - 10mm footer
-      page1Header: 46 + (hasFilters ? 12 : 0),
-      continuationHeader: 12,
-      tableHeader: 8.5,
-      row: 8.5,
-      groupHeader: 8.5,
-      groupSubtotal: 8.5,
-      summary: (hasMetrics ? 26 : 0) + 18 + 10,
-      safetyBuffer: 12,
+      usableHeight: 186,
+      page1Header: 32 + (hasFilters ? 6 : 0), // 38mm with filters, 32mm without
+      continuationHeader: 7.0,
+      tableHeader: 7.0,
+      row: 6.0,
+      groupHeader: 7.0,
+      groupSubtotal: 7.0,
+      summary: (hasMetrics ? 20 : 0) + 14 + 6,
+      safetyBuffer: 2.0,
     };
   }
 
   // Portrait (297mm x 210mm)
   // Usable height inside 10mm top + 10mm bottom padding: 277mm.
-  // Reserving 12mm for ReportFooter: 265mm available for content.
-  // Rows can wrap to 2 lines (dates, long quadra names), measuring ~9.8-10.0mm each in DOM.
+  // Fills ~29-30 rows on Page 1 and ~35 rows on continuation pages right down to footer.
   return {
-    usableHeight: 265,
-    page1Header: 50 + (hasFilters ? 14 : 0), // 64mm with filters, 50mm without
-    continuationHeader: 12,
-    tableHeader: 9.0,
-    row: 10.0, // accurately accounts for 2-line wrapped cells and status badges
-    groupHeader: 9.0,
-    groupSubtotal: 9.0,
-    summary: (hasMetrics ? 26 : 0) + 20 + 12, // 58mm with metrics, 32mm without
-    safetyBuffer: 16,
+    usableHeight: 272,
+    page1Header: 42 + (hasFilters ? 8 : 0), // 50mm with filters, 42mm without
+    continuationHeader: 8.0,
+    tableHeader: 7.5,
+    row: 7.1,
+    groupHeader: 7.5,
+    groupSubtotal: 7.5,
+    summary: (hasMetrics ? 22 : 0) + 16 + 8,
+    safetyBuffer: 3.0,
   };
 }
 
