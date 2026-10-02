@@ -3,7 +3,7 @@
    ========================================================================== */
 
 @media print {
-  /* Orientação Padrão Retrato (Portrait) */
+  /* Configuração A4 e Margens Oficiais */
   @page {
     size: A4 portrait;
     margin: 10mm 12mm;
@@ -15,7 +15,7 @@
     }
   }
 
-  /* Orientação Paisagem (Landscape) quando a classe correspondente está ativa */
+  /* Orientação Paisagem (Landscape) */
   .report-orientation-landscape {
     page: reportLandscape;
   }
@@ -31,7 +31,11 @@
     }
   }
 
+  /* 1. Reset irrestrito de html e body para permitir fluxo contínuo de paginação */
   html, body {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100% !important;
     background: #ffffff !important;
     color: #111827 !important;
     font-size: 9pt !important;
@@ -39,9 +43,10 @@
     print-color-adjust: exact !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: visible !important;
   }
 
-  /* Oculta qualquer elemento de interface na tela durante a impressão */
+  /* 2. Ocultar todos os elementos de tela e navegação */
   .no-print,
   nav,
   header:not(.report-header-container),
@@ -51,53 +56,96 @@
     display: none !important;
   }
 
-  /* Isolamento Absoluto do Relatório Rock 10 */
-  body * {
-    visibility: hidden;
-  }
-
-  #rock10-report-print,
-  #rock10-report-print * {
-    visibility: visible;
-  }
-
-  #rock10-report-print {
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
+  /* 3. Desarmar modais, backdrops e scroll areas - FUNDAMENTAL PARA QUEBRA DE PÁGINA */
+  .report-modal-backdrop,
+  .report-modal-backdrop > div,
+  .report-modal-scroll-area {
+    position: static !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
     width: 100% !important;
     max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    display: block !important;
+    backdrop-filter: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* 4. Documento Imprimível - Fluxo normal estático (sem position: absolute) */
+  #rock10-report-print {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
     box-shadow: none !important;
     background: #ffffff !important;
+    display: block !important;
+    overflow: visible !important;
   }
 
-  /* Tabela e Cabeçalho Repetido */
+  /* 5. Tabela de Dados e Quebra de Página Rigorosa */
+  .report-table-wrapper {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
   table {
     width: 100% !important;
     border-collapse: collapse !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
   }
 
   thead {
-    display: table-header-group !important;
+    display: table-header-group !important; /* Repete cabeçalho em todas as páginas */
   }
 
   tfoot {
     display: table-footer-group !important;
   }
 
-  /* Blindagem contra quebra de página indesejada */
+  tbody {
+    display: table-row-group !important;
+  }
+
+  /* Previne quebra no meio de uma linha */
   tr {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 
+  td, th {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Cabeçalho de Grupo não deve ficar órfão no final da folha */
   .group-header {
     break-after: avoid !important;
     page-break-after: avoid !important;
     break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
   .group-subtotal {
@@ -105,39 +153,58 @@
     page-break-inside: avoid !important;
   }
 
+  /* Totalizador Geral final íntegro sem divisão */
   .report-summary-block {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 
-  /* Oculta o indicador estático de tela e deixa o @page gerenciar o número de página oficial */
-  .report-page-indicator {
-    display: inline-block;
+  .report-footer-container {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 }
 
 /* ==========================================================================
-   ESTILOS DE PREVIEW EM TELA (Simulação de Papel A4)
+   ESTILOS DE PREVIEW EM TELA (Folhas A4 Físicas Individuais)
    ========================================================================== */
-.a4-preview-paper {
-  background: #ffffff;
+.report-pages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.report-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.a4-page {
+  background: #ffffff !important;
   color: #111827;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
-  transition: max-width 0.2s ease-in-out;
+  box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.45), 0 6px 12px -4px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.a4-preview-paper.orientation-portrait {
-  width: 100%;
-  max-width: 210mm;
+.a4-page.orientation-portrait {
+  width: 210mm;
   min-height: 297mm;
-  padding: 12mm 15mm;
-  margin: 0 auto;
+  height: 297mm;
+  padding: 10mm 12mm;
 }
 
-.a4-preview-paper.orientation-landscape {
-  width: 100%;
-  max-width: 297mm;
+.a4-page.orientation-landscape {
+  width: 297mm;
   min-height: 210mm;
-  padding: 10mm 15mm;
-  margin: 0 auto;
+  height: 210mm;
+  padding: 10mm 12mm;
 }
+

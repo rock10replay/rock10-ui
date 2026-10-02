@@ -4,8 +4,10 @@ import type {
   ReportOrientation,
   ReportGroupData,
   ReportColumn,
+  ReportPage,
 } from './reportTypes';
 import { exportReportToCsv } from './csvExporter';
+import { paginateReport } from './reportPaginator';
 
 export interface UseReportEngineReturn<T> {
   orientation: ReportOrientation;
@@ -18,6 +20,7 @@ export interface UseReportEngineReturn<T> {
   setSortDirection: (d: 'asc' | 'desc') => void;
   toggleSortDirection: () => void;
   groupedData: ReportGroupData<T>[];
+  pages: ReportPage<T>[];
   totalRecords: number;
   overallTotals: Record<string, number | string>;
   triggerPrint: () => void;
@@ -195,6 +198,11 @@ export function useReportEngine<T>(
     return totals;
   }, [sortedData, config.columns]);
 
+  // 4. Paginação física A4 com corte rigoroso de limite de folha
+  const pages = useMemo(() => {
+    return paginateReport(groupedData, config, orientation);
+  }, [groupedData, config, orientation]);
+
   const triggerPrint = useCallback(() => {
     window.print();
   }, []);
@@ -214,6 +222,7 @@ export function useReportEngine<T>(
     setSortDirection,
     toggleSortDirection,
     groupedData,
+    pages,
     totalRecords: sortedData.length,
     overallTotals,
     triggerPrint,

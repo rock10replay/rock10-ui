@@ -4,6 +4,8 @@ export interface ReportFooterProps {
   systemName?: string;
   systemUrl?: string;
   generationDateTime?: string;
+  pageNumber?: number;
+  totalPages?: number;
   className?: string;
 }
 
@@ -11,6 +13,8 @@ export function ReportFooter({
   systemName = 'Rock 10 Replay',
   systemUrl = 'adm.rock10.com.br',
   generationDateTime,
+  pageNumber = 1,
+  totalPages = 1,
   className = '',
 }: ReportFooterProps) {
   const formattedDateTime = useMemo(() => {
@@ -27,7 +31,7 @@ export function ReportFooter({
 
   return (
     <footer
-      className={`report-footer-container border-t border-gray-300 pt-2 mt-4 flex items-center justify-between text-[9px] text-gray-500 font-medium ${className}`}
+      className={`report-footer-container shrink-0 w-full border-t border-gray-300 pt-2 mt-auto flex items-center justify-between text-[9px] text-gray-500 font-medium ${className}`}
     >
       <div>
         <span className="font-bold text-gray-800">{systemName}</span>
@@ -44,11 +48,12 @@ export function ReportFooter({
       </div>
 
       <div className="text-right">
-        {/* Indicador de página - na impressão via CSS paged media @bottom-right substitui/complementa */}
         <span className="font-bold text-gray-800 report-page-indicator">
-          Página <span className="page-current">1</span> de <span className="page-total">1</span>
+          Página <span className="page-current">{pageNumber}</span> de{' '}
+          <span className="page-total">{totalPages}</span>
         </span>
       </div>
     </footer>
   );
 }
+

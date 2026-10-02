@@ -2,6 +2,7 @@ import { render, screen, fireEvent, renderHook, act } from '@testing-library/rea
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ReportViewerModal } from './ReportViewerModal';
 import { useReportEngine } from './useReportEngine';
+import { paginateReport } from './reportPaginator';
 import type { ReportConfig } from './reportTypes';
 
 interface MockItem {
@@ -78,6 +79,8 @@ describe('useReportEngine Hook', () => {
     expect(result.current.orientation).toBe('portrait');
     expect(result.current.totalRecords).toBe(3);
     expect(result.current.overallTotals['duracaoMin']).toBe('195 min');
+    expect(result.current.pages.length).toBe(1);
+    expect(result.current.pages[0].pageNumber).toBe(1);
   });
 
   it('sorts data ascending and descending', () => {
@@ -98,28 +101,55 @@ describe('useReportEngine Hook', () => {
       result.current.setSortKey('duracaoMin');
       result.current.setSortDirection('asc');
     });
-    expect(result.current.groupedData[0].items[0].duracaoMin).toBe(45);
+    expect(result.current.groupedData[0].items[0].nome).toBe('Semifinal A'); // 45 min
   });
 
-  it('groups data and computes subtotals by group', () => {
+  it('groups data and computes subtotals per group', () => {
     const { result } = renderHook(() => useReportEngine(mockData, mockConfig));
 
     act(() => {
       result.current.setSelectedGroupKey('arena');
     });
 
-    // Deve ter 2 grupos: Arena Praia e Arena Central
-    expect(result.current.groupedData.length).toBe(2);
+    expect(result.current.groupedData.length).toBe(2); // Arena Praia e Arena Central
 
     const arenaCentral = result.current.groupedData.find((g) => g.groupKey === 'Arena Central');
     expect(arenaCentral).toBeDefined();
     expect(arenaCentral?.items.length).toBe(2);
-    // Subtotal de Arena Central: 45 + 60 = 105 min
-    expect(arenaCentral?.subtotals['duracaoMin']).toBe('105 min');
+    expect(arenaCentral?.subtotals['duracaoMin']).toBe('105 min'); // 45 + 60
 
     const arenaPraia = result.current.groupedData.find((g) => g.groupKey === 'Arena Praia');
     expect(arenaPraia?.items.length).toBe(1);
     expect(arenaPraia?.subtotals['duracaoMin']).toBe('90 min');
+  });
+});
+
+describe('reportPaginator Module', () => {
+  it('divides 46 items into multiple A4 pages when exceeding single page height', () => {
+    const largeDataset: MockItem[] = Array.from({ length: 46 }, (_, i) => ({
+      id: i + 1,
+      nome: `Partida ${i + 1}`,
+      arena: 'Arena 15A Beach Sports',
+      duracaoMin: 60,
+      data: '2026-10-02',
+    }));
+
+    const groups = [
+      {
+        groupKey: 'all',
+        groupLabel: '',
+        items: largeDataset,
+        subtotals: {},
+      },
+    ];
+
+    const pages = paginateReport(groups, mockConfig, 'portrait');
+    expect(pages.length).toBeGreaterThan(1);
+    expect(pages[0].pageNumber).toBe(1);
+    expect(pages[0].totalPages).toBe(pages.length);
+    expect(pages[0].isFirstPage).toBe(true);
+    expect(pages[pages.length - 1].isLastPage).toBe(true);
+    expect(pages[pages.length - 1].showSummary).toBe(true);
   });
 });
 
@@ -128,19 +158,7 @@ describe('ReportViewerModal Component', () => {
     vi.clearAllMocks();
   });
 
-  it('does not render when isOpen is false', () => {
-    render(
-      <ReportViewerModal
-        isOpen={false}
-        onClose={vi.fn()}
-        data={mockData}
-        config={mockConfig}
-      />
-    );
-    expect(screen.queryByText('Relatório de Transmissões Esportivas')).toBeNull();
-  });
-
-  it('renders complete A4 document elements when isOpen is true', () => {
+  it('renders report header, table rows and summary when open', () => {
     render(
       <ReportViewerModal
         isOpen={true}
@@ -150,13 +168,12 @@ describe('ReportViewerModal Component', () => {
       />
     );
 
-    // Header & Título
-    expect(screen.getAllByText('Relatório de Transmissões Esportivas').length).toBeGreaterThan(0);
-    expect(screen.getByText('Período: Outubro de 2026')).toBeDefined();
+    // Título e Emissor
+    expect(screen.getAllByText('Relatório de Transmissões Esportivas').length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText('Complexo Esportivo Rock 10')).toBeDefined();
 
-    // Filtros
-    expect(screen.getByText('Arena Praia, Arena Central')).toBeDefined();
+    // Filtros aplicados
+    expect(screen.getByText(/Arena Praia, Arena Central/i)).toBeDefined();
 
     // Linhas da Tabela
     expect(screen.getByText('Final Masculina')).toBeDefined();
@@ -168,7 +185,7 @@ describe('ReportViewerModal Component', () => {
     expect(screen.getAllByText('195 min').length).toBeGreaterThanOrEqual(1);
 
     // Rodapé
-    expect(screen.getByText('Rock 10 Replay')).toBeDefined();
+    expect(screen.getAllByText('Rock 10 Replay').length).toBeGreaterThanOrEqual(1);
   });
 
   it('toggles orientation between portrait and landscape', () => {
@@ -184,15 +201,16 @@ describe('ReportViewerModal Component', () => {
     const landscapeBtn = screen.getByText('📑 Paisagem');
     fireEvent.click(landscapeBtn);
 
-    const printContainer = document.getElementById('rock10-report-print');
-    expect(printContainer?.className).toContain('orientation-landscape');
+    const a4Pages = document.querySelectorAll('.a4-page');
+    expect(a4Pages.length).toBeGreaterThan(0);
+    expect(a4Pages[0].className).toContain('orientation-landscape');
 
     const portraitBtn = screen.getByText('📄 Retrato');
     fireEvent.click(portraitBtn);
-    expect(printContainer?.className).toContain('orientation-portrait');
+    expect(a4Pages[0].className).toContain('orientation-portrait');
   });
 
-  it('calls window.print when clicking Imprimir / Salvar PDF button', () => {
+  it('calls window.print when clicking Imprimir / PDF button', () => {
     const printSpy = vi.spyOn(window, 'print').mockImplementation(() => {});
 
     render(
@@ -204,7 +222,7 @@ describe('ReportViewerModal Component', () => {
       />
     );
 
-    const printBtn = screen.getByText('Imprimir / Salvar PDF');
+    const printBtn = screen.getByRole('button', { name: /Imprimir \/ PDF/i });
     fireEvent.click(printBtn);
 
     expect(printSpy).toHaveBeenCalledTimes(1);

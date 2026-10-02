@@ -58,8 +58,10 @@ export interface ReportFilterBadge {
 export interface ReportConfig<T> {
   title: string;
   subtitle?: string;
+  emitterName?: string;
   emitterInfo?: ReportEmitterInfo;
   filtersApplied?: ReportFilterBadge[];
+  appliedFilters?: ReportFilterBadge[];
   columns: ReportColumn<T>[];
   groupOptions?: ReportGroupOption<T>[];
   sortOptions?: ReportSortOption<T>[];
@@ -68,6 +70,8 @@ export interface ReportConfig<T> {
   defaultGroupKey?: string;
   defaultSortKey?: string;
   defaultSortDirection?: 'asc' | 'desc';
+  /** Limite máximo opcional de itens por página A4 (calculado dinamicamente caso omitido) */
+  pageSize?: number;
   /** Nome do arquivo ao baixar CSV ou sugerir no PDF (sem extensão) */
   fileName?: string;
 }
@@ -77,4 +81,23 @@ export interface ReportGroupData<T> {
   groupLabel: string;
   items: T[];
   subtotals: Record<string, number | string>;
+}
+
+export interface ReportPageGroup<T> {
+  groupKey: string;
+  groupLabel: string;
+  isContinuation?: boolean;
+  items: T[];
+  itemStartIndex: number;
+  subtotals?: Record<string, number | string>;
+  showSubtotals?: boolean;
+}
+
+export interface ReportPage<T> {
+  pageNumber: number;
+  totalPages: number;
+  isFirstPage: boolean;
+  isLastPage: boolean;
+  groups: ReportPageGroup<T>[];
+  showSummary: boolean;
 }

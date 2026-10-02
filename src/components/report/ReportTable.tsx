@@ -1,10 +1,10 @@
 import React from 'react';
 import { ArrowUp, ArrowDown } from 'lucide-react';
-import type { ReportColumn, ReportGroupData } from './reportTypes';
+import type { ReportColumn, ReportGroupData, ReportPageGroup } from './reportTypes';
 
 export interface ReportTableProps<T> {
   columns: ReportColumn<T>[];
-  groups: ReportGroupData<T>[];
+  groups: (ReportGroupData<T> | ReportPageGroup<T>)[];
   showSubtotals?: boolean;
   sortKey?: string;
   sortDirection?: 'asc' | 'desc';
@@ -25,7 +25,7 @@ export function ReportTable<T>({
 
   return (
     <div className={`report-table-wrapper w-full overflow-x-auto ${className}`}>
-      <table className="w-full text-left border-collapse text-[10.5px] leading-tight">
+      <table className="w-full text-left border-collapse text-[10px] leading-tight">
         {/* Cabeçalho da Tabela - thead com repetição automática em quebras de página */}
         <thead className="table-header-group bg-gray-100 text-gray-800 uppercase font-black tracking-wider border-y-2 border-gray-300">
           <tr>
@@ -43,7 +43,7 @@ export function ReportTable<T>({
                 <th
                   key={col.key}
                   style={col.width ? { width: col.width } : undefined}
-                  className={`py-2 px-2.5 font-bold border-b border-gray-300 select-none ${alignClass} ${
+                  className={`py-1.5 px-2 font-bold border-b border-gray-300 select-none ${alignClass} ${
                     col.sortable && onSortChange ? 'cursor-pointer hover:bg-gray-200 transition-colors' : ''
                   }`}
                   onClick={() => {
@@ -77,26 +77,41 @@ export function ReportTable<T>({
         {/* Corpo com Grupos e Itens */}
         <tbody className="divide-y divide-gray-200">
           {groups.map((group, groupIdx) => {
+            const canShowSubtotals =
+              !('showSubtotals' in group) || group.showSubtotals !== false;
+
             const hasSubtotals =
               showSubtotals &&
+              canShowSubtotals &&
               hasMultipleGroups &&
-              columns.some((c) => c.aggregate && group.subtotals[c.key] !== undefined && group.subtotals[c.key] !== '');
+              columns.some((c) => c.aggregate && group.subtotals && group.subtotals[c.key] !== undefined && group.subtotals[c.key] !== '');
+
+            const baseIdx =
+              'itemStartIndex' in group && typeof group.itemStartIndex === 'number'
+                ? group.itemStartIndex
+                : 0;
 
             return (
-              <React.Fragment key={group.groupKey || groupIdx}>
+              <React.Fragment key={`${group.groupKey}-${groupIdx}`}>
                 {/* Linha de Cabeçalho do Grupo (quando aplicável) */}
                 {hasMultipleGroups && group.groupLabel && (
                   <tr className="group-header bg-gray-200/90 text-gray-900 font-bold border-t-2 border-b border-gray-400">
-                    <td colSpan={columns.length} className="py-1.5 px-2.5 text-[11px]">
+                    <td colSpan={columns.length} className="py-1 px-2 text-[10.5px]">
                       <span className="inline-block w-2 h-2 rounded-full bg-primary-600 mr-2" />
-                      {group.groupLabel}
+                      <span>{group.groupLabel}</span>
+                      {'isContinuation' in group && group.isContinuation && (
+                        <span className="text-gray-500 font-normal italic text-[9px] ml-2">
+                          (continuação)
+                        </span>
+                      )}
                     </td>
                   </tr>
                 )}
 
                 {/* Linhas de Dados */}
                 {group.items.map((item, itemIdx) => {
-                  const isEven = itemIdx % 2 === 0;
+                  const actualIdx = baseIdx + itemIdx;
+                  const isEven = actualIdx % 2 === 0;
 
                   return (
                     <tr
@@ -116,10 +131,10 @@ export function ReportTable<T>({
                         return (
                           <td
                             key={col.key}
-                            className={`py-1.5 px-2.5 text-gray-800 border-b border-gray-200 align-middle ${alignClass}`}
+                            className={`py-1 px-2 text-gray-800 border-b border-gray-200 align-middle ${alignClass}`}
                           >
                             {col.render
-                              ? col.render(item, itemIdx)
+                              ? col.render(item, actualIdx)
                               : String((item as Record<string, unknown>)[col.key] ?? '—')}
                           </td>
                         );
@@ -147,7 +162,7 @@ export function ReportTable<T>({
                         );
                       }
 
-                      const subVal = group.subtotals[col.key];
+                      const subVal = group.subtotals ? group.subtotals[col.key] : undefined;
                       return (
                         <td key={col.key} className={`py-1.5 px-2.5 text-[10.5px] ${alignClass}`}>
                           {subVal !== undefined && subVal !== '' ? String(subVal) : ''}
