@@ -112,6 +112,18 @@ export {
   type ReportGroupData,
 } from './components/report';
 
+// Export theme
+export {
+  ThemeProvider,
+  useTheme,
+  ThemeToggle,
+  type Theme,
+  type ResolvedTheme,
+  type ThemeContextValue,
+  type ThemeProviderProps,
+  type ThemeToggleProps,
+} from './theme';
+
 // Export styles
 import './styles/theme.css';
 
