@@ -9,6 +9,8 @@ export interface AppShellProps {
   footer?: ReactNode;
   sidebarOpen?: boolean;
   onSidebarOpenChange?: (open: boolean) => void;
+  sidebarCollapsed?: boolean;
+  onSidebarCollapsedChange?: (collapsed: boolean) => void;
   className?: string;
 }
 
@@ -19,6 +21,7 @@ export function AppShell({
   footer,
   sidebarOpen: controlledOpen,
   onSidebarOpenChange,
+  sidebarCollapsed = false,
   className,
 }: AppShellProps) {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
@@ -38,7 +41,8 @@ export function AppShell({
       {/* Sidebar Desktop e Mobile */}
       <aside
         className={cn(
-          'fixed left-0 top-0 bottom-0 w-[260px] bg-white dark:bg-dark-surface border-r border-gray-200 dark:border-dark-border flex flex-col z-50 transition-transform duration-300 ease-in-out md:translate-x-0',
+          'fixed left-0 top-0 bottom-0 bg-white dark:bg-dark-surface border-r border-gray-200 dark:border-dark-border flex flex-col z-50 transition-all duration-300 ease-in-out md:translate-x-0',
+          sidebarCollapsed ? 'w-[72px]' : 'w-[260px]',
           open ? 'translate-x-0' : '-translate-x-full'
         )}
       >
@@ -55,7 +59,12 @@ export function AppShell({
       )}
 
       {/* Área Principal de Conteúdo */}
-      <div className="flex-1 flex flex-col md:pl-[260px] min-w-0 min-h-screen">
+      <div
+        className={cn(
+          'flex-1 flex flex-col min-w-0 min-h-screen transition-all duration-300 ease-in-out',
+          sidebarCollapsed ? 'md:pl-[72px]' : 'md:pl-[260px]'
+        )}
+      >
         {header}
 
         <main className="flex-1 w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col">
@@ -129,21 +138,38 @@ export interface AppSidebarProps {
   footer?: ReactNode;
   className?: string;
   onNavigate?: () => void;
+  collapsed?: boolean;
 }
 
-export function AppSidebar({ brand, children, footer, className, onNavigate }: AppSidebarProps) {
+export function AppSidebar({ brand, children, footer, className, onNavigate, collapsed = false }: AppSidebarProps) {
   return (
     <div className={cn('flex flex-col h-full', className)}>
-      <div className="h-16 flex items-center px-6 border-b border-gray-200 dark:border-dark-border shrink-0">
+      <div
+        className={cn(
+          'h-16 flex items-center border-b border-gray-200 dark:border-dark-border shrink-0 transition-all duration-200',
+          collapsed ? 'px-2 justify-center' : 'px-6'
+        )}
+      >
         {brand}
       </div>
 
-      <nav className="flex-1 p-4 space-y-1 overflow-y-auto" onClick={onNavigate}>
+      <nav
+        className={cn(
+          'flex-1 space-y-1 overflow-y-auto overflow-x-hidden transition-all duration-200',
+          collapsed ? 'p-2' : 'p-4'
+        )}
+        onClick={onNavigate}
+      >
         {children}
       </nav>
 
       {footer && (
-        <div className="p-4 border-t border-gray-200 dark:border-dark-border shrink-0">
+        <div
+          className={cn(
+            'border-t border-gray-200 dark:border-dark-border shrink-0 transition-all duration-200',
+            collapsed ? 'p-2 flex justify-center' : 'p-4'
+          )}
+        >
           {footer}
         </div>
       )}
