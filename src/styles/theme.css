@@ -5,6 +5,52 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Color Scheme & Form Controls Theming */
+:root {
+  color-scheme: light;
+}
+
+:root.dark,
+.dark {
+  color-scheme: dark;
+}
+
+select {
+  color-scheme: light dark;
+}
+
+.dark select,
+select.dark {
+  color-scheme: dark;
+}
+
+/* Explicit fallback & surface styling for option elements */
+option {
+  background-color: #ffffff;
+  color: #111827;
+}
+
+.dark option,
+.dark select option,
+select.dark option {
+  background-color: var(--color-dark-surface, #1A202C);
+  color: var(--color-dark-text, #E2E8F0);
+}
+
+.dark option:checked,
+.dark select option:checked,
+select.dark option:checked {
+  background-color: var(--color-primary-600, #0B8359);
+  color: #ffffff;
+}
+
+.dark option:disabled,
+.dark select option:disabled,
+select.dark option:disabled {
+  background-color: var(--color-dark-bg, #0F1419);
+  color: var(--color-dark-text-muted, #718096);
+}
+
 @theme {
   /* Brand Colors - Primary (Verde Esportivo) */
   --color-primary-50: #E6F7F1;

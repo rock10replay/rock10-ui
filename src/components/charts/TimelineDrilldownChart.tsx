@@ -375,10 +375,10 @@ export function TimelineDrilldownChart({
                 setCompareYear(yr - 1);
                 handleBackToMonths();
               }}
-              className="h-9 px-3 bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border rounded-xl text-xs font-bold text-gray-800 dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-primary-500/20 cursor-pointer"
+              className="h-9 px-3 bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border rounded-xl text-xs font-bold text-gray-800 dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-primary-500/20 cursor-pointer [color-scheme:light] dark:[color-scheme:dark]"
             >
               {[currentYear, currentYear - 1, currentYear - 2, currentYear - 3].map((yr) => (
-                <option key={yr} value={yr}>
+                <option key={yr} value={yr} className="bg-white text-gray-900 dark:bg-dark-surface dark:text-dark-text">
                   {yr}
                 </option>
               ))}

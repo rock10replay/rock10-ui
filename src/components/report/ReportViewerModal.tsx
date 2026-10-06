@@ -144,10 +144,10 @@ export function ReportViewerModal<T>({
               <select
                 value={selectedGroupKey}
                 onChange={(e) => setSelectedGroupKey(e.target.value)}
-                className="bg-gray-50 dark:bg-dark-surface-light border border-gray-200 dark:border-dark-border text-gray-800 dark:text-dark-text text-xs rounded-lg px-2 py-1.5 focus:ring-1 focus:ring-primary-500 outline-hidden cursor-pointer"
+                className="bg-gray-50 dark:bg-dark-surface-light border border-gray-200 dark:border-dark-border text-gray-800 dark:text-dark-text text-xs rounded-lg px-2 py-1.5 focus:ring-1 focus:ring-primary-500 outline-hidden cursor-pointer [color-scheme:light] dark:[color-scheme:dark]"
               >
                 {groupSelectOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
+                  <option key={opt.value} value={opt.value} className="bg-white text-gray-900 dark:bg-dark-surface dark:text-dark-text">
                     {opt.label}
                   </option>
                 ))}
@@ -162,10 +162,10 @@ export function ReportViewerModal<T>({
               <select
                 value={sortKey}
                 onChange={(e) => setSortKey(e.target.value)}
-                className="bg-gray-50 dark:bg-dark-surface-light border border-gray-200 dark:border-dark-border text-gray-800 dark:text-dark-text text-xs rounded-lg px-2 py-1.5 focus:ring-1 focus:ring-primary-500 outline-hidden cursor-pointer"
+                className="bg-gray-50 dark:bg-dark-surface-light border border-gray-200 dark:border-dark-border text-gray-800 dark:text-dark-text text-xs rounded-lg px-2 py-1.5 focus:ring-1 focus:ring-primary-500 outline-hidden cursor-pointer [color-scheme:light] dark:[color-scheme:dark]"
               >
                 {sortSelectOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
+                  <option key={opt.value} value={opt.value} className="bg-white text-gray-900 dark:bg-dark-surface dark:text-dark-text">
                     {opt.label}
                   </option>
                 ))}

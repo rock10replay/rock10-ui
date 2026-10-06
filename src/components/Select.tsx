@@ -1,4 +1,11 @@
-import { SelectHTMLAttributes, ReactNode, forwardRef } from 'react';
+import {
+  SelectHTMLAttributes,
+  ReactNode,
+  forwardRef,
+  Children,
+  isValidElement,
+  cloneElement,
+} from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '../utils/cn';
 
@@ -60,7 +67,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             ref={ref}
             disabled={disabled}
             className={cn(
-              'w-full appearance-none bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border text-gray-900 dark:text-dark-text font-medium transition-all focus:outline-none focus:bg-white dark:focus:bg-dark-bg focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 disabled:bg-gray-100 dark:disabled:bg-dark-surface disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer',
+              'w-full appearance-none bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border text-gray-900 dark:text-dark-text font-medium transition-all focus:outline-none focus:bg-white dark:focus:bg-dark-bg focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 disabled:bg-gray-100 dark:disabled:bg-dark-surface disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer [color-scheme:light] dark:[color-scheme:dark]',
               sizeClasses[selectSize],
               error &&
                 'border-red-500 focus:border-red-500 focus:ring-red-500/20 text-red-900 dark:text-red-300',
@@ -70,11 +77,27 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           >
             {options
               ? options.map((opt) => (
-                  <option key={opt.value} value={opt.value} disabled={opt.disabled}>
+                  <option
+                    key={opt.value}
+                    value={opt.value}
+                    disabled={opt.disabled}
+                    className="bg-white text-gray-900 dark:bg-dark-surface dark:text-dark-text"
+                  >
                     {opt.label}
                   </option>
                 ))
-              : children}
+              : Children.map(children, (child) => {
+                  if (isValidElement(child) && child.type === 'option') {
+                    const childProps = child.props as { className?: string };
+                    return cloneElement(child, {
+                      className: cn(
+                        'bg-white text-gray-900 dark:bg-dark-surface dark:text-dark-text',
+                        childProps.className
+                      ),
+                    } as any);
+                  }
+                  return child;
+                })}
           </select>
 
           <div className="absolute right-3 pointer-events-none text-gray-400 dark:text-dark-text-muted">
