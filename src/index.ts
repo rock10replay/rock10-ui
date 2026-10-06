@@ -7,7 +7,7 @@ export { getImageDimensions, lerDimensoesImagem, type ImageDimensions } from './
 export { Button, type ButtonProps } from './components/Button';
 export { CopyButton, type CopyButtonProps } from './components/CopyButton';
 export { Input, type InputProps } from './components/Input';
-export { Select, type SelectProps, type SelectOption } from './components/Select';
+export { Select, type SelectProps, type SelectOption, type SelectVariant, type SelectSize } from './components/Select';
 export { Textarea, type TextareaProps } from './components/Textarea';
 export { Checkbox, type CheckboxProps } from './components/Checkbox';
 export { Switch, type SwitchProps } from './components/Switch';

@@ -9,6 +9,9 @@ import {
 import { ChevronDown } from 'lucide-react';
 import { cn } from '../utils/cn';
 
+export type SelectVariant = 'default' | 'filter' | 'purple' | 'amber';
+export type SelectSize = 'sm' | 'md' | 'lg';
+
 export interface SelectOption {
   value: string | number;
   label: string;
@@ -20,19 +23,40 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   error?: string;
   helperText?: string;
   options?: SelectOption[];
-  selectSize?: 'sm' | 'md' | 'lg';
+  variant?: SelectVariant;
+  selectSize?: SelectSize;
   fullWidth?: boolean;
+  containerClassName?: string;
   children?: ReactNode;
 }
+
+const variantClasses: Record<SelectVariant, string> = {
+  default:
+    'bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border text-gray-900 dark:text-dark-text focus:bg-white dark:focus:bg-dark-bg focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20',
+  filter:
+    'bg-white dark:bg-dark-surface border border-gray-150 dark:border-dark-border text-gray-700 dark:text-dark-text shadow-sm focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 font-semibold',
+  purple:
+    'bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 font-semibold focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20',
+  amber:
+    'bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800 text-amber-700 dark:text-amber-300 font-bold focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20',
+};
+
+const sizeClasses: Record<SelectSize, string> = {
+  sm: 'h-8 pl-2.5 pr-7 text-xs rounded-xl',
+  md: 'h-10 pl-3.5 pr-10 text-sm rounded-xl',
+  lg: 'h-12 pl-4 pr-12 text-base rounded-xl',
+};
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
       className,
+      containerClassName,
       label,
       error,
       helperText,
       options,
+      variant = 'default',
       selectSize = 'md',
       fullWidth = true,
       disabled,
@@ -44,14 +68,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     const selectId = id || (label ? `select-${label.toLowerCase().replace(/\s+/g, '-')}` : undefined);
 
-    const sizeClasses = {
-      sm: 'h-8 pl-2.5 pr-8 text-xs rounded-lg',
-      md: 'h-10 pl-3.5 pr-10 text-sm rounded-xl',
-      lg: 'h-12 pl-4 pr-12 text-base rounded-xl',
-    };
-
     return (
-      <div className={cn('flex flex-col gap-1.5', fullWidth && 'w-full')}>
+      <div className={cn('flex flex-col', (label || error || helperText) && 'gap-1.5', fullWidth && 'w-full', containerClassName)}>
         {label && (
           <label
             htmlFor={selectId}
@@ -67,7 +85,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             ref={ref}
             disabled={disabled}
             className={cn(
-              'w-full appearance-none bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border text-gray-900 dark:text-dark-text font-medium transition-all focus:outline-none focus:bg-white dark:focus:bg-dark-bg focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 disabled:bg-gray-100 dark:disabled:bg-dark-surface disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer [color-scheme:light] dark:[color-scheme:dark]',
+              'w-full appearance-none transition-all focus:outline-none disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer [color-scheme:light] dark:[color-scheme:dark]',
+              variantClasses[variant],
               sizeClasses[selectSize],
               error &&
                 'border-red-500 focus:border-red-500 focus:ring-red-500/20 text-red-900 dark:text-red-300',
@@ -100,8 +119,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                 })}
           </select>
 
-          <div className="absolute right-3 pointer-events-none text-gray-400 dark:text-dark-text-muted">
-            <ChevronDown className="w-4 h-4" />
+          <div className="absolute right-2.5 pointer-events-none text-gray-400 dark:text-dark-text-muted">
+            <ChevronDown className={cn(selectSize === 'sm' ? 'w-3.5 h-3.5' : 'w-4 h-4')} />
           </div>
         </div>
 
@@ -116,3 +135,4 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
 Select.displayName = 'Select';
 export default Select;
+
