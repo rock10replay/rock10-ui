@@ -106,14 +106,20 @@ export const SwitchCard = forwardRef<HTMLInputElement, SwitchCardProps>(
     const renderIcon = () => {
       if (!icon) return null;
 
-      const iconContent = isValidElement(icon)
-        ? icon
-        : typeof icon === 'function'
-        ? (() => {
-            const IconComponent = icon as ComponentType<{ className?: string }>;
-            return <IconComponent className={cardSize === 'sm' ? 'w-4 h-4' : 'w-4.5 h-4.5'} />;
-          })()
-        : icon;
+      let iconContent: ReactNode;
+      if (isValidElement(icon)) {
+        iconContent = icon;
+      } else if (
+        typeof icon === 'function' ||
+        (typeof icon === 'object' &&
+          icon !== null &&
+          ('render' in (icon as any) || '$$typeof' in (icon as any)))
+      ) {
+        const IconComponent = icon as ComponentType<{ className?: string }>;
+        iconContent = <IconComponent className={cardSize === 'sm' ? 'w-4 h-4' : 'w-4.5 h-4.5'} />;
+      } else {
+        iconContent = icon as ReactNode;
+      }
 
       return (
         <div

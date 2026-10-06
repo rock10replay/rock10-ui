@@ -56,7 +56,10 @@ export interface ButtonProps
 function renderButtonIcon(icon?: ReactNode | React.ComponentType<{ className?: string }>, className = 'w-4 h-4') {
   if (!icon) return null;
   if (isValidElement(icon)) return icon;
-  if (typeof icon === 'function' || (typeof icon === 'object' && icon !== null && 'render' in icon)) {
+  if (
+    typeof icon === 'function' ||
+    (typeof icon === 'object' && icon !== null && ('render' in icon || '$$typeof' in icon))
+  ) {
     return createElement(icon as React.ComponentType<{ className?: string }>, { className });
   }
   return icon as ReactNode;
