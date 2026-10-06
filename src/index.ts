@@ -8,6 +8,13 @@ export { Button, type ButtonProps } from './components/Button';
 export { CopyButton, type CopyButtonProps } from './components/CopyButton';
 export { Input, type InputProps, type InputVariant, type InputSize } from './components/Input';
 export { Select, type SelectProps, type SelectOption, type SelectVariant, type SelectSize } from './components/Select';
+export {
+  MultiSelect,
+  type MultiSelectProps,
+  type MultiSelectOption,
+  type MultiSelectVariant,
+  type MultiSelectSize,
+} from './components/MultiSelect';
 export { Textarea, type TextareaProps } from './components/Textarea';
 export { Checkbox, type CheckboxProps } from './components/Checkbox';
 export { Switch, type SwitchProps } from './components/Switch';
