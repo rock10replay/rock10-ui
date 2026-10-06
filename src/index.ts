@@ -11,6 +11,7 @@ export { Select, type SelectProps, type SelectOption, type SelectVariant, type S
 export { Textarea, type TextareaProps } from './components/Textarea';
 export { Checkbox, type CheckboxProps } from './components/Checkbox';
 export { Switch, type SwitchProps } from './components/Switch';
+export { SwitchCard, type SwitchCardProps, type SwitchCardColor, type SwitchCardSize } from './components/SwitchCard';
 export { Badge, type BadgeProps } from './components/Badge';
 export { Skeleton, type SkeletonProps } from './components/Skeleton';
 export { IconButton, type IconButtonProps, type IconButtonVariant, type IconButtonSize } from './components/IconButton';
