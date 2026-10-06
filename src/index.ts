@@ -8,6 +8,12 @@ export { Button, type ButtonProps } from './components/Button';
 export { CopyButton, type CopyButtonProps } from './components/CopyButton';
 export { Input, type InputProps, type InputVariant, type InputSize } from './components/Input';
 export {
+  CurrencyInput,
+  type CurrencyInputProps,
+  type CurrencyInputVariant,
+  type CurrencyInputSize,
+} from './components/CurrencyInput';
+export {
   ImageUploadInput,
   type ImageUploadInputProps,
   type ImageUploadSize,
