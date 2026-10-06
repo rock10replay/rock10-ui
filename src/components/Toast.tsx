@@ -75,7 +75,7 @@ interface ToastCardProps {
 
 function ToastCard({ toast, onClose }: ToastCardProps) {
   const { id, title, message, variant = 'info', duration = 4000, action } = toast;
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (duration > 0) {
