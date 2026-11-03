@@ -53,7 +53,7 @@ export const Default: Story = {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button');
     await userEvent.click(button);
-    await expect(args.onLikeChange).toHaveBeenCalledWith(129);
+    await expect(args.onLikeChange).toHaveBeenCalledWith(129, true);
   },
 };
 
