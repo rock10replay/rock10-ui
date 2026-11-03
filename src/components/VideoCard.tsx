@@ -247,11 +247,12 @@ export function VideoCard({
 
           {showShare && (
             <IconButton
-              icon={<Share2 className="w-4 h-4 text-gray-600 dark:text-dark-text-muted" />}
+              icon={<Share2 className="w-4 h-4 transition-colors" />}
               ariaLabel="Compartilhar vídeo"
               variant="secondary"
               size="sm"
               rounded="xl"
+              className="text-gray-600 dark:text-dark-text-muted hover:text-[#37f6e6] dark:hover:text-[#37f6e6] hover:border-[#37f6e6]/50 hover:bg-[#37f6e6]/10"
               onClick={handleDefaultShare}
             />
           )}

@@ -144,7 +144,7 @@ export const DownloadButton = ({
         case 'error':
           return <X className="text-red-600 dark:text-red-400" size={lucideIconSizes[size]} />;
         default:
-          return <Download className="text-gray-600 dark:text-dark-text-muted group-hover:text-primary-500 transition-colors" size={lucideIconSizes[size]} />;
+          return <Download className="text-gray-600 dark:text-dark-text-muted group-hover/download:text-primary-500 dark:group-hover/download:text-primary-400 transition-colors" size={lucideIconSizes[size]} />;
       }
     }
 
@@ -175,7 +175,7 @@ export const DownloadButton = ({
 
   // State configurations
   const stateStyles = {
-    idle: "bg-gray-100 dark:bg-dark-surface hover:bg-gray-200 dark:hover:bg-dark-surface-light border-gray-300 dark:border-dark-border text-gray-700 dark:text-dark-text hover:-translate-y-0.5",
+    idle: "bg-gray-100 dark:bg-dark-surface hover:bg-gray-200 dark:hover:bg-dark-surface-light border-gray-300 dark:border-dark-border text-gray-700 dark:text-dark-text hover:border-primary-500/50 hover:bg-primary-500/10 hover:text-primary-500 dark:hover:text-primary-400 hover:-translate-y-0.5",
     downloading: "bg-primary-50 dark:bg-primary-900/20 border-primary-300 dark:border-primary-800 text-primary-700 dark:text-primary-400",
     success: "bg-green-50 dark:bg-green-950/20 border-green-300 dark:border-green-800 text-green-700 dark:text-green-400 animate-successPulse",
     error: "bg-red-50 dark:bg-red-950/20 border-red-300 dark:border-red-800 text-red-700 dark:text-red-400 animate-shake",
@@ -203,7 +203,7 @@ export const DownloadButton = ({
   return (
     <button
       className={cn(
-        "relative inline-flex items-center gap-2 font-semibold cursor-pointer transition-all duration-200 select-none border overflow-hidden focus-visible:ring-3 focus-visible:ring-primary-300 focus-visible:ring-offset-2 disabled:opacity-75 disabled:cursor-not-allowed active:scale-95",
+        "group/download relative inline-flex items-center gap-2 font-semibold cursor-pointer transition-all duration-200 select-none border overflow-hidden focus-visible:ring-3 focus-visible:ring-primary-300 focus-visible:ring-offset-2 disabled:opacity-75 disabled:cursor-not-allowed active:scale-95",
         stateStyles[state],
         iconOnly ? iconOnlySizeClasses[size] : sizeClasses[size],
         className

@@ -112,10 +112,10 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
       aria-pressed={isFavorito}
       className={cn(
         'relative inline-flex items-center justify-center gap-1.5 font-bold transition-all duration-200 select-none cursor-pointer',
-        'active:scale-95 focus:outline-none focus:ring-2 focus:ring-amber-500/40 disabled:opacity-50 disabled:cursor-not-allowed',
+        'active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#f4ac39]/40 disabled:opacity-50 disabled:cursor-not-allowed',
         isFavorito
-          ? 'bg-amber-500/15 border border-amber-500/40 text-amber-500 dark:text-amber-400 shadow-xs shadow-amber-500/10 hover:bg-amber-500/25'
-          : 'bg-gray-100 hover:bg-gray-200 text-gray-600 border border-gray-300 dark:bg-dark-surface dark:hover:bg-dark-surface-light dark:text-dark-text-muted dark:border-dark-border',
+          ? 'bg-[#f4ac39]/15 border border-[#f4ac39]/40 text-[#f4ac39] dark:text-[#f4ac39] shadow-xs shadow-[#f4ac39]/10 hover:bg-[#f4ac39]/25 hover:border-[#f4ac39]/60'
+          : 'bg-gray-100 hover:bg-gray-200 text-gray-600 border border-gray-300 dark:bg-dark-surface dark:hover:bg-dark-surface-light dark:text-dark-text-muted dark:border-dark-border hover:text-[#f4ac39] dark:hover:text-[#f4ac39] hover:border-[#f4ac39]/50 hover:bg-[#f4ac39]/10',
         showText ? textModeSizeClasses[size] : iconOnlySizeClasses[size],
         className
       )}
@@ -124,7 +124,7 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
         size={iconSizes}
         className={cn(
           'transition-transform duration-200 shrink-0',
-          isFavorito ? 'fill-current scale-110 text-amber-500 dark:text-amber-400' : 'text-current'
+          isFavorito ? 'fill-[#f4ac39] scale-110 text-[#f4ac39] dark:text-[#f4ac39]' : 'text-current'
         )}
       />
       {showText && (
