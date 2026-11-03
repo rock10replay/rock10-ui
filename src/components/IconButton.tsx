@@ -13,7 +13,7 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   /** Tamanho do botão */
   size?: IconButtonSize;
   /** Se true, exibe apenas o ícone em formato circular */
-  rounded?: boolean;
+  rounded?: boolean | 'full' | 'xl';
   /** Label para acessibilidade (obrigatório) */
   ariaLabel: string;
   /** Se true, botão fica desabilitado */
@@ -35,7 +35,7 @@ export const IconButton = ({
 }: IconButtonProps): JSX.Element => {
   
   // Base classes for the button
-  const baseClasses = "relative inline-flex items-center justify-center gap-2 border-none font-semibold cursor-pointer transition-all select-none -webkit-tap-highlight-color-transparent outline-none focus-visible:ring-3 focus-visible:ring-primary-300 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none active:scale-95 duration-150";
+  const baseClasses = "relative inline-flex items-center justify-center gap-2 font-semibold cursor-pointer transition-all select-none -webkit-tap-highlight-color-transparent outline-none focus-visible:ring-3 focus-visible:ring-primary-300 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none active:scale-95 duration-150";
 
   // Variant classes
   const variantClasses = {
@@ -46,7 +46,11 @@ export const IconButton = ({
   };
 
   // Size classes (with mobile-first heights)
-  const sizeClasses = rounded ? {
+  const sizeClasses = rounded === 'xl' ? {
+    sm: "w-9 h-9 rounded-xl p-0 text-base shrink-0",
+    md: "w-10 h-10 rounded-xl p-0 text-lg shrink-0 sm:w-11 sm:h-11",
+    lg: "w-12 h-12 rounded-xl p-0 text-xl shrink-0 sm:w-13 sm:h-13",
+  } : rounded ? {
     sm: "w-8 h-8 rounded-full p-0 text-base",
     md: "w-10 h-10 rounded-full p-0 text-lg sm:w-11 sm:h-11", // enhanced touch target on mobile
     lg: "w-12 h-12 rounded-full p-0 text-xl sm:w-13 sm:h-13", // enhanced touch target on mobile

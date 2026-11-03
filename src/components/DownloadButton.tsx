@@ -27,6 +27,8 @@ export interface DownloadButtonProps {
   iconOnly?: boolean;
   /** Se true, utiliza ícones do Lucide (Download, Loader2, Check, X) ao invés de emoji */
   useLucide?: boolean;
+  /** Classes CSS adicionais */
+  className?: string;
 }
 
 export const DownloadButton = ({
@@ -40,6 +42,7 @@ export const DownloadButton = ({
   size = 'md',
   iconOnly = false,
   useLucide = true,
+  className,
 }: DownloadButtonProps): JSX.Element => {
   const [state, setState] = useState<DownloadState>('idle');
   const [progress, setProgress] = useState(0);
@@ -178,6 +181,12 @@ export const DownloadButton = ({
     error: "bg-red-50 dark:bg-red-950/20 border-red-300 dark:border-red-800 text-red-700 dark:text-red-400 animate-shake",
   };
 
+  const iconOnlySizeClasses = {
+    sm: "w-9 h-9 p-0 text-xs rounded-xl min-h-0 shrink-0 justify-center",
+    md: "w-10 h-10 p-0 text-sm rounded-xl min-h-0 shrink-0 justify-center",
+    lg: "w-12 h-12 p-0 text-base rounded-xl min-h-0 shrink-0 justify-center",
+  };
+
   // Size configurations
   const sizeClasses = {
     sm: "px-2 py-1 text-sm min-h-[32px] rounded-md",
@@ -194,9 +203,10 @@ export const DownloadButton = ({
   return (
     <button
       className={cn(
-        "relative inline-flex items-center gap-2 font-semibold cursor-pointer transition-all duration-200 select-none border overflow-hidden focus-visible:ring-3 focus-visible:ring-primary-300 focus-visible:ring-offset-2 disabled:opacity-75 disabled:cursor-not-allowed",
+        "relative inline-flex items-center gap-2 font-semibold cursor-pointer transition-all duration-200 select-none border overflow-hidden focus-visible:ring-3 focus-visible:ring-primary-300 focus-visible:ring-offset-2 disabled:opacity-75 disabled:cursor-not-allowed active:scale-95",
         stateStyles[state],
-        sizeClasses[size]
+        iconOnly ? iconOnlySizeClasses[size] : sizeClasses[size],
+        className
       )}
       onClick={handleDownload}
       disabled={state === 'downloading'}

@@ -97,6 +97,7 @@ export { ArenaPosterCard, type ArenaPosterCardProps } from './components/ArenaPo
 export { ArenaProfileHeader, type ArenaProfileHeaderProps } from './components/ArenaProfileHeader';
 export { SponsorCarousel, type SponsorCarouselProps, type SponsorItem } from './components/SponsorCarousel';
 export { LikeButton, type LikeButtonProps } from './components/LikeButton';
+export { FavoriteButton, type FavoriteButtonProps } from './components/FavoriteButton';
 export { DownloadButton, type DownloadButtonProps } from './components/DownloadButton';
 export { Logo, type LogoProps } from './components/Logo';
 export { ShareLinkModal, type ShareLinkModalProps } from './components/ShareLinkModal';

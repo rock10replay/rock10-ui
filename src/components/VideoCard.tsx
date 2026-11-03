@@ -218,7 +218,7 @@ export function VideoCard({
 
       <div className="p-3.5 sm:p-4 flex flex-col gap-3 relative z-20 bg-white dark:bg-dark-surface flex-1">
         <div
-          className="flex gap-2.5 items-center justify-start pointer-events-auto"
+          className="flex gap-2 items-center justify-start pointer-events-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <DownloadButton
@@ -247,11 +247,11 @@ export function VideoCard({
 
           {showShare && (
             <IconButton
-              icon={<Share2 className="w-4 h-4 text-gray-600 dark:text-dark-text" />}
+              icon={<Share2 className="w-4 h-4 text-gray-600 dark:text-dark-text-muted" />}
               ariaLabel="Compartilhar vídeo"
-              variant="ghost"
+              variant="secondary"
               size="sm"
-              rounded
+              rounded="xl"
               onClick={handleDefaultShare}
             />
           )}
