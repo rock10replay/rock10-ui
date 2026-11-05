@@ -70,6 +70,20 @@ export {
   type TableContainerProps,
   type TableProps,
 } from './components/Table';
+export {
+  ResponsiveDataList,
+  DataCard,
+  DataCardHeader,
+  DataCardBody,
+  DataCardField,
+  DataCardFooter,
+  type ResponsiveDataListProps,
+  type DataCardProps,
+  type DataCardHeaderProps,
+  type DataCardBodyProps,
+  type DataCardFieldProps,
+  type DataCardFooterProps,
+} from './components/ResponsiveDataList';
 export { FilterBar, type FilterBarProps } from './components/FilterBar';
 export { PageHeader, type PageHeaderProps } from './components/PageHeader';
 export { Loading, type LoadingProps } from './components/Loading';
