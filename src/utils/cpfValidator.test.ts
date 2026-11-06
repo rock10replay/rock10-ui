@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { cleanCpf, formatCpf, isValidCpf } from './cpfValidator';
+import { cleanCpf, formatCpf, isValidCpf, maskCpf } from './cpfValidator';
 
 describe('cpfValidator', () => {
   it('cleanCpf removes non-numeric characters', () => {
@@ -14,6 +14,23 @@ describe('cpfValidator', () => {
     expect(formatCpf('123')).toBe('123');
     expect(formatCpf('123456')).toBe('123.456');
     expect(formatCpf('123456789')).toBe('123.456.789');
+  });
+
+  it('maskCpf masks CPF preserving first 3 and last 2 digits for privacy', () => {
+    // Casos reais de produção (exemplo do Rock 10: Yasmin e Maria Eduarda)
+    expect(maskCpf('160.760.557-07')).toBe('160.***.***-07');
+    expect(maskCpf('16076055707')).toBe('160.***.***-07');
+    expect(maskCpf('197.259.327-73')).toBe('197.***.***-73');
+    expect(maskCpf('19725932773')).toBe('197.***.***-73');
+
+    // Idempotência caso já venha mascarado
+    expect(maskCpf('160.***.***-07')).toBe('160.***.***-07');
+
+    // Casos vazios ou nulos
+    expect(maskCpf('')).toBe('');
+    expect(maskCpf(null)).toBe('');
+    expect(maskCpf(undefined)).toBe('');
+    expect(maskCpf('   ')).toBe('');
   });
 
   it('isValidCpf validates valid and invalid CPFs', () => {

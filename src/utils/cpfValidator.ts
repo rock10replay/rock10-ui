@@ -15,6 +15,30 @@ export function formatCpf(cpf: string | null | undefined): string {
   return `${numbers.slice(0, 3)}.${numbers.slice(3, 6)}.${numbers.slice(6, 9)}-${numbers.slice(9)}`;
 }
 
+/**
+ * Mascara o CPF para privacidade / LGPD, exibindo apenas os 3 primeiros dígitos
+ * e os 2 últimos dígitos, mascarando o restante com asteriscos (*).
+ * Exemplo: "160.760.557-07" ou "16076055707" -> "160.***.***-07".
+ */
+export function maskCpf(cpf: string | null | undefined): string {
+  if (!cpf) return '';
+  const trimmed = cpf.trim();
+  if (!trimmed) return '';
+  if (trimmed.includes('*')) return trimmed;
+
+  const numbers = cleanCpf(trimmed);
+  if (numbers.length === 11) {
+    return `${numbers.slice(0, 3)}.***.***-${numbers.slice(9, 11)}`;
+  }
+
+  // Fallback caso receba CPF com tamanho diferente de 11 dígitos
+  if (numbers.length >= 5) {
+    return `${numbers.slice(0, 3)}.${'***'}-${numbers.slice(-2)}`;
+  }
+
+  return formatCpf(trimmed);
+}
+
 export function isValidCpf(cpf: string | null | undefined): boolean {
   const clean = cleanCpf(cpf);
 

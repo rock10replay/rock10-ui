@@ -1,6 +1,6 @@
 // Export utils
 export { cn } from './utils/cn';
-export { cleanCpf, formatCpf, isValidCpf } from './utils/cpfValidator';
+export { cleanCpf, formatCpf, isValidCpf, maskCpf } from './utils/cpfValidator';
 export { getImageDimensions, lerDimensoesImagem, type ImageDimensions } from './utils/image';
 
 // Export atomic components
