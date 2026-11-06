@@ -7,6 +7,8 @@ export interface PaginationProps {
   totalPages: number;
   totalItems?: number;
   pageSize?: number;
+  pageSizeOptions?: number[];
+  onPageSizeChange?: (pageSize: number) => void;
   onPageChange: (page: number) => void;
   showEdges?: boolean;
   maxVisiblePages?: number;
@@ -18,6 +20,8 @@ export function Pagination({
   totalPages,
   totalItems,
   pageSize,
+  pageSizeOptions = [10, 20, 50, 100],
+  onPageSizeChange,
   onPageChange,
   showEdges = true,
   maxVisiblePages = 5,
@@ -55,12 +59,17 @@ export function Pagination({
     return items;
   }, [page, totalPages, maxVisiblePages]);
 
-  if (totalPages <= 1 && totalItems === undefined) {
+  // Se não houver itens e for página única sem seletor de tamanho, não exibe
+  if (totalPages <= 1 && totalItems === undefined && !onPageSizeChange) {
+    return null;
+  }
+  if (totalItems === 0 && !onPageSizeChange) {
     return null;
   }
 
   const startRecord = pageSize ? Math.min((page - 1) * pageSize + 1, totalItems ?? 0) : null;
   const endRecord = pageSize && totalItems !== undefined ? Math.min(page * pageSize, totalItems) : null;
+  const showNavigation = totalPages > 1;
 
   return (
     <div
@@ -69,23 +78,44 @@ export function Pagination({
         className
       )}
     >
-      {totalItems !== undefined && (
-        <div className="text-xs font-medium text-gray-500 dark:text-dark-text-muted">
-          {pageSize && startRecord && endRecord ? (
-            <span>
-              Mostrando <strong className="font-bold text-gray-800 dark:text-dark-text">{startRecord}</strong>-
-              <strong className="font-bold text-gray-800 dark:text-dark-text">{endRecord}</strong> de{' '}
-              <strong className="font-bold text-gray-800 dark:text-dark-text">{totalItems}</strong> registros
-            </span>
-          ) : (
-            <span>
-              Total de <strong className="font-bold text-gray-800 dark:text-dark-text">{totalItems}</strong> registros
-            </span>
-          )}
-        </div>
-      )}
+      <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full sm:w-auto justify-between sm:justify-start">
+        {totalItems !== undefined && (
+          <div className="text-xs font-medium text-gray-500 dark:text-dark-text-muted">
+            {pageSize && startRecord && endRecord ? (
+              <span>
+                Mostrando <strong className="font-bold text-gray-800 dark:text-dark-text">{startRecord}</strong>-
+                <strong className="font-bold text-gray-800 dark:text-dark-text">{endRecord}</strong> de{' '}
+                <strong className="font-bold text-gray-800 dark:text-dark-text">{totalItems}</strong> registros
+              </span>
+            ) : (
+              <span>
+                Total de <strong className="font-bold text-gray-800 dark:text-dark-text">{totalItems}</strong> registros
+              </span>
+            )}
+          </div>
+        )}
 
-      <div className="flex items-center gap-1.5 ml-auto">
+        {onPageSizeChange && (
+          <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-dark-text-muted">
+            <span className="hidden sm:inline">Exibir:</span>
+            <select
+              value={pageSize || 20}
+              onChange={(e) => onPageSizeChange(Number(e.target.value))}
+              aria-label="Itens por página"
+              className="px-2 py-1 bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border rounded-lg text-xs font-bold text-gray-700 dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-primary-500/20 cursor-pointer shadow-2xs"
+            >
+              {pageSizeOptions.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt} por pág.
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+      </div>
+
+      {showNavigation && (
+        <div className="flex items-center gap-1.5 ml-auto">
         {showEdges && (
           <button
             type="button"
@@ -165,6 +195,7 @@ export function Pagination({
           </button>
         )}
       </div>
+      )}
     </div>
   );
 }
